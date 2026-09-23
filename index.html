@@ -639,6 +639,50 @@ function selectGalleryImage(src){
  if(image) image.src=src;
  document.querySelectorAll('.gallery-thumb').forEach(thumb=>thumb.classList.toggle('active',thumb.dataset.src===src));
 }
+const modelCatalog={
+ 'Michael Kors':['Jet Set Travel Tote','Hamilton Legacy','Mercer Gallery','Soho Chain Shoulder','Bradshaw Satchel'],
+ Coach:['Tabby Shoulder Bag 26','Pillow Madison','Rogue 39','Willow Tote','Brooklyn Shoulder Bag'],
+ 'Kate Spade':['Knott Medium Tote','Sam Icon Small Tote','Hudson Crossbody','Spade Flower Jacquard Tote','Nicola Twistlock'],
+ Furla:['Metropolis Mini','1927 Top Handle','MiaStella Tote','Furla Flow','Opportunity Tote'],
+ Longchamp:['Le Pliage Original M','Le Pliage Original XS','Roseau Essential XS','Roseau Essential L','Épure Crossbody'],
+ 'Tory Burch':['Perry Triple-Compartment Tote','Kira Chevron Small','Fleming Convertible Shoulder Bag','McGraw Camera Bag','Lee Radziwill Petite'],
+ 'Marc Jacobs':['The Tote Bag Medium','The Snapshot','J Marc Shoulder Bag','Soft Box 21','Mini Grind'],
+ Guess:['Noelle Girlfriend Satchel','Eco Brenton Tote','Silvana Shoulder Bag','Katey Crossbody','Naya Top Handle'],
+ DKNY:['Bryant Shoulder Bag','Perry Tote','Quilted Chain Crossbody','Paige Satchel','Ellis Camera Bag'],
+ 'Liu Jo':['Alicia Handbag','Ecs M Crossbody','Manhattan Tote','Noel Shoulder Bag','Ardeco Top Handle'],
+ 'Saint Laurent':['Le 5 à 7','Loulou Small','Kate Tassel Bag','Niki Medium','Solferino Small'],
+ Balenciaga:['Hourglass Small','Le Cagole XS','City Bag Small','Neo Classic City','Rodeo Medium'],
+ Prada:['Re-Edition 2005','Galleria Medium','Cleo Brushed Leather','Cahier Shoulder Bag','Arqué Leather Bag'],
+ Gucci:['Jackie 1961 Small','Dionysus Small','Marmont Mini','Horsebit 1955 Small','Bamboo 1947'],
+ 'Bottega Veneta':['Andiamo','Jodie Mini','Cassette','Small Hop','Mini Pouch'],
+ Loewe:['Puzzle Small','Gate Dual Mini','Hammock Compact','Flamenco Mini','Pebble Bucket'],
+ 'Chloé':['Marcie Medium','Woody Tote','Daria Small','Penelope Shoulder Bag','Kattie Hobo'],
+ 'Miu Miu':['Wander Matelassé','Arcadie Bag','Matelassé Shoulder Bag','Nappa Leather Hobo','Lady Bag'],
+ Valentino:['Locò Small','Rockstud Spike Bag','VLogo Moon Bag','Roman Stud Top Handle','One Stud Bag'],
+ Mulberry:['Bayswater','Amberley Satchel','Lily Shoulder Bag','Softie Top Handle','Iris Hobo'],
+ 'Hermès':['Birkin 25','Kelly 25','Constance 18','Evelyne III 29','Picotin Lock 18'],
+ Chanel:['Classic Flap Medium','Classic Flap Maxi','Boy Chanel Medium','19 Handbag','Coco Handle Mini'],
+ Dior:['Lady Dior Medium','Book Tote Medium','Saddle Bag','30 Montaigne Bag','Bobby East-West'],
+ 'Louis Vuitton':['Neverfull MM','Alma BB','Capucines Mini','Speedy Bandoulière 25','Pochette Métis'],
+ Fendi:['Baguette Medium','Sunshine Medium','Peekaboo ISeeU Small','First Small','By The Way Medium'],
+ Celine:['Triomphe Classique 16','Belt Bag Mini','Ava Triomphe','Teen Besace','Cabas Phantom'],
+ Givenchy:['Antigona Small','Voyou Small','Kenny Bag','4G Small Bag','Pandora Medium'],
+ Balmain:['1945 Soft Small','B-Buzz 23','Monogram Jacquard Tote','Pillow Bag','1945 Croc Embossed'],
+ Versace:['La Medusa Shoulder Bag','Greca Goddess Mini','Virtus Top Handle','Chain Couture Bag','Repeat Crossbody'],
+ 'Tom Ford':['Jennifer Small','T Chain Shoulder Bag','Hobo Bag Small','TF Bucket Bag','Pia Shoulder Bag'],
+ Jacquemus:['Le Chiquito Moyen','Le Bambino Long','Le Bisou Perle','Le Grand Bambino','Le Vanity']
+};
+const modelBasePrices={
+ 'Michael Kors':295,Coach:550,'Kate Spade':395,Furla:320,Longchamp:125,'Tory Burch':495,'Marc Jacobs':450,Guess:180,DKNY:240,'Liu Jo':210,
+ 'Saint Laurent':2200,Balenciaga:2400,Prada:2100,Gucci:2200,'Bottega Veneta':2800,Loewe:2900,'Chloé':2100,'Miu Miu':2700,Valentino:2800,Mulberry:1400,
+ 'Hermès':12800,Chanel:10500,Dior:5900,'Louis Vuitton':1650,Fendi:3200,Celine:5800,Givenchy:1900,Balmain:2500,Versace:2300,'Tom Ford':3900,Jacquemus:790
+};
+Object.entries(modelCatalog).forEach(([brand,names])=>names.forEach((name,index)=>{
+ if(products.some(product=>product.brand===brand&&product.name===name)) return;
+ const price=Math.round(modelBasePrices[brand]*(1+index*.06));
+ const first=Math.round(price*.7);
+ products.push({brand,name,category:'Bags',price,change:Number((2.1+index*.4).toFixed(1)),trend:'up',meta:'Signature leather · Damen-Handtasche',introduced:2008+(index%12),image:galleryAlternatives[index%galleryAlternatives.length],history:[first,Math.round(first+(price-first)*.22),Math.round(first+(price-first)*.48),Math.round(first+(price-first)*.73),price]});
+}));
 function historyYears(p){return Array.from({length:p.history.length},(_,i)=>p.introduced+i*(2026-p.introduced)/(p.history.length-1)).map(year=>Math.round(year))}
 function renderHistory(p){
  const values=p.history, years=historyYears(p), min=Math.min(...values), max=Math.max(...values), span=max-min||1;
