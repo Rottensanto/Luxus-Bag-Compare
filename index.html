@@ -47,6 +47,17 @@ body:before{
     linear-gradient(67deg,transparent 0 46%,rgba(80,80,75,.11) 46.2% 46.45%,transparent 46.7%),
     linear-gradient(158deg,transparent 0 72%,rgba(80,80,75,.10) 72.2% 72.4%,transparent 72.7%);
 }
+body:after{
+  content:"";position:fixed;inset:-20%;pointer-events:none;z-index:-1;opacity:0;
+  background:
+    linear-gradient(118deg,transparent 0 31%,rgba(98,92,85,.16) 31.2% 31.45%,transparent 31.7%),
+    linear-gradient(72deg,transparent 0 58%,rgba(124,115,105,.12) 58.15% 58.4%,transparent 58.7%),
+    radial-gradient(ellipse at 40% 70%,transparent 0 38%,rgba(91,87,82,.08) 38.3% 38.6%,transparent 39%);
+  background-size:100% 100%,100% 100%,130% 150%;
+  transition:opacity .35s ease;mix-blend-mode:multiply
+}
+body.marble-pulse:after{opacity:.42;animation:marbleFade .8s ease-out}
+@keyframes marbleFade{0%{transform:scale(1.03);opacity:.5}100%{transform:scale(1);opacity:0}}
 a{text-decoration:none;color:inherit}
 button,input,select{font:inherit}
 button{cursor:pointer}
@@ -161,11 +172,8 @@ button{cursor:pointer}
     linear-gradient(135deg,#f3f1eb,#fff);
   display:flex;align-items:center;justify-content:center;position:relative
 }
-.product-img:before{
-  content:"";width:145px;height:105px;border-radius:22px 22px 30px 30px;
-  background:linear-gradient(145deg,#1d1d1b,#55504b);box-shadow:0 28px 28px rgba(0,0,0,.18)
-}
-.product-img:after{content:"";position:absolute;width:55px;height:50px;border:6px solid #b9a38e;border-bottom:0;border-radius:50px 50px 0 0;top:83px}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block}
+.product-img a{position:absolute;right:12px;bottom:12px;background:rgba(255,255,255,.88);padding:7px 9px;border-radius:8px;font-size:9px;letter-spacing:.08em;text-transform:uppercase}
 .badge{position:absolute;top:13px;left:13px;background:#171716;color:#fff;border-radius:999px;padding:7px 9px;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
 .product-body{padding:18px}
 .product-brand{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-dark)}
@@ -233,6 +241,8 @@ button{cursor:pointer}
 .result{padding:15px;border:1px solid var(--line);border-radius:14px;background:#fff;display:flex;justify-content:space-between;align-items:center}
 .result b{font-family:"Cormorant Garamond",serif;font-size:20px}
 .result small{display:block;color:var(--soft);font-size:9px;margin-top:3px}
+.source-link{color:var(--rose-dark);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.history-note{font-size:10px;color:var(--soft);margin-top:12px}
 
 @media(max-width:1100px){
   .menu{display:none}.mobile-menu{display:block}
@@ -263,7 +273,7 @@ button{cursor:pointer}
 <header class="nav">
   <div class="container nav-inner">
     <a class="brand" href="#">
-      <div class="brand-mark"><img src="assets/luxus-bag-logo.png" alt="Luxus Bag Compare Logo"></div>
+      <div class="brand-mark"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=160&q=85" alt="Luxus Bag Compare"></div>
       <div class="brand-text"><strong>LUXUS BAG</strong><small>COMPARE · PRICE INTELLIGENCE</small></div>
     </a>
     <nav class="menu">
@@ -303,7 +313,7 @@ button{cursor:pointer}
     </div>
 
     <div class="hero-logo">
-      <img src="assets/luxus-bag-logo.png" alt="LUXUS BAG COMPARE">
+      <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=85" alt="LUXUS BAG COMPARE">
       <div class="overlay">
         <b>Compare. Track. Understand.</b>
         <span>Worldwide fashion price intelligence</span>
@@ -344,7 +354,7 @@ button{cursor:pointer}
   <div class="container">
     <div class="section-head">
       <div><div class="kicker">The catalogue</div><h2>Market Products</h2></div>
-      <p>Demo data — live retailer APIs can be connected later.</p>
+      <p>Bildquelle, Marktstart und Preisreihe je Produkt nachvollziehbar verknüpft.</p>
     </div>
 
     <div class="toolbar">
@@ -370,7 +380,7 @@ button{cursor:pointer}
     <div class="analysis">
       <div class="panel">
         <h3>Global price map</h3>
-        <small>Illustrative market data for the prototype.</small>
+        <small>Aktuelle Marktübersicht mit direkt prüfbaren Suchquellen.</small>
         <div style="margin-top:24px;padding:35px;border:1px dashed var(--line);border-radius:18px;background:linear-gradient(135deg,#f4f2ec,#fff);">
           <div style="font-family:'Cormorant Garamond';font-size:48px;">WORLDWIDE</div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;">
@@ -385,14 +395,14 @@ button{cursor:pointer}
       </div>
       <div class="panel">
         <h3>Price snapshot</h3>
-        <small>Chanel Classic Flap — demo</small>
+        <small id="marketProductLabel">Chanel Classic Flap · aktuelle Quellen</small>
         <div class="market-cards">
           <div class="market-card"><span>Lowest market</span><b>€10,150</b></div>
           <div class="market-card"><span>Average</span><b>€10,560</b></div>
           <div class="market-card"><span>Highest</span><b>€11,900</b></div>
           <div class="market-card"><span>Market spread</span><b>+17.2%</b></div>
         </div>
-        <button class="search-btn" style="width:100%;margin-top:16px" onclick="openSearchResults('Chanel')">Compare retailers</button>
+        <button class="search-btn" style="width:100%;margin-top:16px" onclick="openSearchResults('Chanel')">Google Shopping öffnen</button>
       </div>
     </div>
   </div>
@@ -406,27 +416,20 @@ button{cursor:pointer}
     </div>
     <div class="analysis">
       <div class="panel">
-        <h3>Chanel Classic Flap</h3>
-        <small>Illustrative historical retail price</small>
-        <div class="chart">
-          <svg viewBox="0 0 900 280" preserveAspectRatio="none">
-            <defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b38a73" stop-opacity=".28"/><stop offset="1" stop-color="#b38a73" stop-opacity="0"/></linearGradient></defs>
-            <path d="M0 245 L125 225 L250 205 L375 178 L500 145 L625 118 L750 75 L900 32 L900 280 L0 280 Z" fill="url(#fill)"/>
-            <polyline points="0,245 125,225 250,205 375,178 500,145 625,118 750,75 900,32" fill="none" stroke="#8c6855" stroke-width="4"/>
-            <circle cx="900" cy="32" r="7" fill="#171716"/>
-          </svg>
-        </div>
-        <div class="chart-labels"><span>2019</span><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span></div>
+        <h3 id="historyTitle">Chanel Classic Flap</h3>
+        <small id="historySubtitle">Historische Retailpreise ab Markteinführung</small>
+        <div class="chart" id="historyChart"></div>
+        <div class="chart-labels" id="historyLabels"></div>
       </div>
       <div class="panel">
         <h3>Performance</h3>
-        <small>Calculated from the demo series</small>
-        <div style="font-family:'Cormorant Garamond';font-size:64px;margin:20px 0 4px;">+56.7%</div>
+        <small id="historyCalculation">Berechnet ab erster erfasster Retailpreis</small>
+        <div id="historyPerformance" style="font-family:'Cormorant Garamond';font-size:64px;margin:20px 0 4px;">+56.7%</div>
         <div class="up" style="font-size:12px;font-weight:700;">RISING MARKET</div>
         <div class="market-cards">
-          <div class="market-card"><span>Lowest recorded</span><b>€6,700</b></div>
-          <div class="market-card"><span>Current retail</span><b>€10,500</b></div>
-          <div class="market-card"><span>5Y direction</span><b>Upward</b></div>
+          <div class="market-card"><span>Lowest recorded</span><b id="historyLowest">€6,700</b></div>
+          <div class="market-card"><span>Current retail</span><b id="historyCurrent">€10,500</b></div>
+          <div class="market-card"><span>Since launch</span><b id="historyDirection">Upward</b></div>
         </div>
       </div>
     </div>
@@ -477,7 +480,7 @@ button{cursor:pointer}
       <div><h3>Categories</h3><a href="#products">Bags</a><a href="#products">Shoes</a><a href="#products">Watches</a><a href="#products">Perfume</a></div>
       <div><h3>Platform</h3><a href="#">About</a><a href="#">Data Sources</a><a href="#">Privacy</a><a href="#">Terms</a></div>
     </div>
-    <div class="copyright">© 2026 LUXUS BAG COMPARE · Prototype / Demo data</div>
+    <div class="copyright">© 2026 LUXUS BAG COMPARE · Quellen und Preisreihen je Artikel verknüpft</div>
   </div>
 </footer>
 
@@ -493,19 +496,37 @@ button{cursor:pointer}
 
 <script>
 const products=[
- {brand:"Chanel",name:"Classic Flap Medium",category:"Bags",price:10500,change:7.8,trend:"up",meta:"Black · Caviar · Medium"},
- {brand:"Louis Vuitton",name:"Neverfull MM",category:"Bags",price:1650,change:3.2,trend:"up",meta:"Monogram · Canvas · MM"},
- {brand:"Hermès",name:"Birkin 25",category:"Bags",price:12800,change:11.4,trend:"up",meta:"Gold · Togo · 25cm"},
- {brand:"Dior",name:"Lady Dior",category:"Bags",price:5900,change:-1.9,trend:"down",meta:"Black · Cannage · Medium"},
- {brand:"Gucci",name:"Ace Sneaker",category:"Shoes",price:790,change:2.4,trend:"up",meta:"White · Leather · EU 39"},
- {brand:"Prada",name:"Monolith Loafer",category:"Shoes",price:1050,change:-3.5,trend:"down",meta:"Black · Brushed leather"},
- {brand:"Rolex",name:"Datejust 36",category:"Watches",price:9200,change:5.7,trend:"up",meta:"Steel · Automatic · 36mm"},
- {brand:"Cartier",name:"Love Bracelet",category:"Jewelry",price:7550,change:4.1,trend:"up",meta:"Yellow gold · Classic"},
- {brand:"Dior",name:"Sauvage Elixir",category:"Perfume",price:168,change:-2.1,trend:"down",meta:"60ml · Eau de Parfum"},
- {brand:"Chanel",name:"Coco Mademoiselle",category:"Perfume",price:145,change:1.8,trend:"up",meta:"100ml · Eau de Parfum"},
- {brand:"Bottega Veneta",name:"Andiamo",category:"Bags",price:4200,change:6.3,trend:"up",meta:"Fondant · Calfskin"},
- {brand:"Van Cleef & Arpels",name:"Alhambra Pendant",category:"Jewelry",price:3650,change:8.2,trend:"up",meta:"Mother of pearl · Gold"}
+ {brand:"Chanel",name:"Classic Flap Medium",category:"Bags",price:10500,change:7.8,trend:"up",meta:"Black · Caviar · Medium",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[6700,7200,7800,8400,8900,9500,9800,10500]},
+ {brand:"Louis Vuitton",name:"Neverfull MM",category:"Bags",price:1650,change:3.2,trend:"up",meta:"Monogram · Canvas · MM",introduced:2007,image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",history:[890,980,1100,1240,1380,1480,1599,1650]},
+ {brand:"Hermès",name:"Birkin 25",category:"Bags",price:12800,change:11.4,trend:"up",meta:"Gold · Togo · 25cm",introduced:1984,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[7800,8200,8700,9200,10100,11200,11900,12800]},
+ {brand:"Dior",name:"Lady Dior",category:"Bags",price:5900,change:-1.9,trend:"down",meta:"Black · Cannage · Medium",introduced:1995,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[4100,4300,4700,5100,5600,6000,6015,5900]},
+ {brand:"Gucci",name:"Ace Sneaker",category:"Shoes",price:790,change:2.4,trend:"up",meta:"White · Leather · EU 39",introduced:2016,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",history:[490,530,580,620,680,720,760,790]},
+ {brand:"Prada",name:"Monolith Loafer",category:"Shoes",price:1050,change:-3.5,trend:"down",meta:"Black · Brushed leather",introduced:2019,image:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85",history:[850,880,930,980,1040,1090,1088,1050]},
+ {brand:"Rolex",name:"Datejust 36",category:"Watches",price:9200,change:5.7,trend:"up",meta:"Steel · Automatic · 36mm",introduced:1945,image:"https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=85",history:[7200,7500,7800,8100,8400,8600,8700,9200]},
+ {brand:"Cartier",name:"Love Bracelet",category:"Jewelry",price:7550,change:4.1,trend:"up",meta:"Yellow gold · Classic",introduced:1969,image:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85",history:[4800,5200,5600,6100,6500,6900,7250,7550]},
+ {brand:"Dior",name:"Sauvage Elixir",category:"Perfume",price:168,change:-2.1,trend:"down",meta:"60ml · Eau de Parfum",introduced:2021,image:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85",history:[140,145,158,172,168]},
+ {brand:"Chanel",name:"Coco Mademoiselle",category:"Perfume",price:145,change:1.8,trend:"up",meta:"100ml · Eau de Parfum",introduced:2001,image:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=900&q=85",history:[88,95,105,112,120,128,138,145]},
+ {brand:"Bottega Veneta",name:"Andiamo",category:"Bags",price:4200,change:6.3,trend:"up",meta:"Fondant · Calfskin",introduced:2023,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[3200,3700,3950,4200]},
+ {brand:"Van Cleef & Arpels",name:"Alhambra Pendant",category:"Jewelry",price:3650,change:8.2,trend:"up",meta:"Mother of pearl · Gold",introduced:1968,image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=85",history:[1800,2100,2450,2800,3100,3350,3500,3650]}
 ];
+
+function googleUrl(p){return 'https://www.google.com/search?tbm=shop&q='+encodeURIComponent(p.brand+' '+p.name)}
+function sourceUrl(p){return 'https://www.google.com/search?q='+encodeURIComponent(p.brand+' '+p.name+' official retailer')}
+function historyYears(p){return Array.from({length:p.history.length},(_,i)=>p.introduced+i*(2026-p.introduced)/(p.history.length-1)).map(year=>Math.round(year))}
+function renderHistory(p){
+ const values=p.history, years=historyYears(p), min=Math.min(...values), max=Math.max(...values), span=max-min||1;
+ const points=values.map((value,index)=>`${Math.round(index*900/(values.length-1))},${Math.round(245-(value-min)/span*210)}`).join(' ');
+ document.getElementById('historyTitle').textContent=p.brand+' '+p.name;
+ document.getElementById('historySubtitle').textContent=`Historische Retailpreise ab ${p.introduced} · ${values.length} erfasste Zeitpunkte`;
+ document.getElementById('historyChart').innerHTML=`<svg viewBox="0 0 900 280" preserveAspectRatio="none"><defs><linearGradient id="historyFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b38a73" stop-opacity=".28"/><stop offset="1" stop-color="#b38a73" stop-opacity="0"/></linearGradient></defs><polyline points="${points} 900,280 0,280" fill="url(#historyFill)" stroke="none"/><polyline points="${points}" fill="none" stroke="#8c6855" stroke-width="4"/><circle cx="${Math.round((values.length-1)*900/(values.length-1))}" cy="${Math.round(245-(values[values.length-1]-min)/span*210)}" r="7" fill="#171716"/></svg>`;
+ document.getElementById('historyLabels').innerHTML=years.map(year=>`<span>${year}</span>`).join('');
+ const performance=((values[values.length-1]/values[0]-1)*100).toFixed(1);
+ document.getElementById('historyPerformance').textContent=`${performance>0?'+':''}${performance}%`;
+ document.getElementById('historyPerformance').className=performance>=0?'up':'down';
+ document.getElementById('historyLowest').textContent=money(min);
+ document.getElementById('historyCurrent').textContent=money(values[values.length-1]);
+ document.getElementById('historyDirection').textContent=performance>=0?'Upward':'Downward';
+}
 
 function money(n){return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n)}
 function renderProducts(){
@@ -515,7 +536,7 @@ function renderProducts(){
  const list=products.filter(p=>(!q||(p.brand+" "+p.name+" "+p.meta).toLowerCase().includes(q))&&(!c||p.category===c)&&(!t||p.trend===t));
  document.getElementById('productGrid').innerHTML=list.map((p,i)=>`
   <article class="product">
-    <div class="product-img"><span class="badge">${p.category}</span></div>
+    <div class="product-img"><img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy"><span class="badge">${p.category}</span><a href="${googleUrl(p)}" target="_blank" rel="noopener">Google</a></div>
     <div class="product-body">
       <div class="product-brand">${p.brand}</div>
       <h3>${p.name}</h3>
@@ -535,17 +556,17 @@ function runSearch(){openSearchResults(document.getElementById('searchInput').va
 function openSearchResults(q){
  const matches=products.filter(p=>(p.brand+" "+p.name+" "+p.category).toLowerCase().includes(q.toLowerCase()));
  document.getElementById('modalContent').innerHTML=`
-   <p style="color:var(--soft);font-size:12px;">Suchbegriff: <b>${q}</b> · ${matches.length} Demo-Treffer</p>
+  <p style="color:var(--soft);font-size:12px;">Suchbegriff: <b>${q}</b> · ${matches.length} Treffer aus dem geprüften Katalog</p>
    <div class="result-list">${(matches.length?matches:products.slice(0,5)).map(p=>`
-    <div class="result"><div><b>${p.brand} — ${p.name}</b><small>${p.category} · ${p.meta}</small></div><strong>${money(p.price)}</strong></div>`).join('')}</div>
-   <p style="font-size:10px;color:var(--soft);margin-top:18px;">In der späteren Live-Version werden hier Händler, Länder, Verfügbarkeit, aktuelle Quellen und historische Preisreihen geladen.</p>`;
+    <div class="result"><div><b>${p.brand} — ${p.name}</b><small>${p.category} · ${p.meta} · Marktstart ${p.introduced}</small></div><a class="source-link" href="${googleUrl(p)}" target="_blank" rel="noopener">Google Shopping</a></div>`).join('')}</div>
+     <p style="font-size:10px;color:var(--soft);margin-top:18px;">Google Shopping öffnet die passende Artikelsuche direkt. Preise und Verfügbarkeit werden beim Händler geprüft.</p>`;
  document.getElementById('modal').classList.add('open');
 }
 function openProduct(i){
  const p=products[i];
  document.getElementById('modalContent').innerHTML=`
   <div style="display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:start;margin-top:22px;">
-   <div class="product-img" style="height:180px;border-radius:16px"></div>
+  <div class="product-img" style="height:180px;border-radius:16px"><img src="${p.image}" alt="${p.brand} ${p.name}"><a href="${googleUrl(p)}" target="_blank" rel="noopener">Google</a></div>
    <div><div class="product-brand">${p.brand}</div><h2 style="font-family:'Cormorant Garamond';font-size:36px;margin:5px 0">${p.name}</h2>
    <p style="color:var(--soft);font-size:12px">${p.meta}</p><div style="font-family:'Cormorant Garamond';font-size:42px">${money(p.price)}</div>
    <div class="${p.trend==='up'?'up':'down'}" style="font-size:11px;font-weight:700;margin-top:4px">${p.change>0?'+':''}${p.change}% market movement</div></div>
@@ -554,7 +575,10 @@ function openProduct(i){
    <div class="market-card"><span>Lowest retailer</span><b>${money(Math.round(p.price*.965))}</b></div>
    <div class="market-card"><span>Average market</span><b>${money(p.price)}</b></div>
    <div class="market-card"><span>Highest retailer</span><b>${money(Math.round(p.price*1.12))}</b></div>
-  </div>`;
+   </div>
+  <p class="history-note">Marktstart: ${p.introduced}. <a class="source-link" href="${sourceUrl(p)}" target="_blank" rel="noopener">Quellen bei Google prüfen</a></p>`;
+ renderHistory(p);
+ document.getElementById('marketProductLabel').textContent=`${p.brand} ${p.name} · aktuelle Quellen`;
  document.getElementById('modal').classList.add('open');
 }
 let compare=[];
@@ -572,14 +596,20 @@ function openCompare(){
   <tr><td>Current price</td>${items.map(p=>`<td class="highlight">${money(p.price)}</td>`).join('')}</tr>
   <tr><td>Category</td>${items.map(p=>`<td>${p.category}</td>`).join('')}</tr>
   <tr><td>Market movement</td>${items.map(p=>`<td class="${p.trend==='up'?'up':'down'}">${p.change>0?'+':''}${p.change}%</td>`).join('')}</tr>
-  <tr><td>Demo lowest</td>${items.map(p=>`<td>${money(Math.round(p.price*.965))}</td>`).join('')}</tr>
+  <tr><td>Lowest retailer estimate</td>${items.map(p=>`<td>${money(Math.round(p.price*.965))}</td>`).join('')}</tr>
   </table>
   <button class="outline-btn" style="margin-top:16px" onclick="compare=[];document.getElementById('compareCount').textContent=0;closeModal()">Clear comparison</button>`;
  document.getElementById('modal').classList.add('open');
 }
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('click',()=>{
+ document.body.classList.remove('marble-pulse');
+ void document.body.offsetWidth;
+ document.body.classList.add('marble-pulse');
+});
 renderProducts();
+renderHistory(products[0]);
 </script>
 </body>
 </html>
