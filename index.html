@@ -254,6 +254,10 @@ button{cursor:pointer}
 .product-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:54px;align-items:start;margin-top:25px}
 .product-hero-image{height:min(650px,68vw);min-height:420px;background:#e9e5dd;overflow:hidden}
 .product-hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-thumbs{display:flex;gap:10px;margin-top:12px;overflow:auto;padding-bottom:4px}
+.gallery-thumb{width:76px;height:76px;flex:0 0 76px;border:1px solid var(--line);padding:0;background:#fff;cursor:pointer;overflow:hidden}
+.gallery-thumb.active{border:2px solid var(--ink)}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .product-info{padding:24px 0}.product-info .product-brand{font-size:11px}
 .product-info h1{font-family:"Cormorant Garamond",serif;font-size:clamp(46px,6vw,82px);font-weight:500;line-height:.9;margin:14px 0 20px;letter-spacing:0}
 .product-description{max-width:520px;color:var(--soft);font-size:14px;line-height:1.8}
@@ -544,6 +548,26 @@ const products=[
  {brand:"Chanel",name:"Classic Flap Medium",category:"Bags",price:10500,change:7.8,trend:"up",meta:"Black · Caviar · Shoulder",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[6700,7200,7800,8400,8900,9500,9800,10500]},
  {brand:"Hermès",name:"Birkin 25",category:"Bags",price:12800,change:11.4,trend:"up",meta:"Gold · Togo · Top handle",introduced:1984,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[7800,8200,8700,9200,10100,11200,11900,12800]},
  {brand:"Chanel",name:"Classic Flap Maxi",category:"Bags",price:30000,change:9.6,trend:"up",meta:"Black · Quilted lambskin · Shoulder",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[19000,21000,22500,24000,26000,27500,29000,30000]}
+ ,{brand:"Longchamp",name:"Le Pliage Original XS",category:"Bags",price:110,change:1.7,trend:"up",meta:"Black · Recycled canvas · Mini tote",introduced:1993,image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",history:[70,78,85,92,98,104,108,110]}
+ ,{brand:"Michael Kors",name:"Hamilton Legacy",category:"Bags",price:375,change:2.1,trend:"up",meta:"Luggage · Leather · Top handle",introduced:2012,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[280,295,310,325,340,355,365,375]}
+ ,{brand:"Coach",name:"Pillow Madison Shoulder Bag",category:"Bags",price:695,change:3.5,trend:"up",meta:"Ivory · Quilted leather · Shoulder",introduced:2021,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[520,550,580,610,640,660,680,695]}
+ ,{brand:"Jacquemus",name:"Le Bambino Long",category:"Bags",price:850,change:4.4,trend:"up",meta:"Black · Calf leather · Shoulder",introduced:2020,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[590,640,680,710,750,790,820,850]}
+ ,{brand:"Prada",name:"Galleria Medium",category:"Bags",price:3900,change:4.9,trend:"up",meta:"Saffiano · Leather · Top handle",introduced:2007,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[2600,2800,3000,3200,3400,3550,3750,3900]}
+ ,{brand:"Louis Vuitton",name:"Alma BB",category:"Bags",price:1800,change:2.9,trend:"up",meta:"Damier Ebene · Canvas · Top handle",introduced:1934,image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",history:[980,1100,1220,1350,1480,1580,1710,1800]}
+ ,{brand:"Fendi",name:"Sunshine Medium",category:"Bags",price:3500,change:5.2,trend:"up",meta:"Natural raffia · Leather · Tote",introduced:2020,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[2700,2850,3000,3150,3250,3350,3450,3500]}
+ ,{brand:"Bottega Veneta",name:"Jodie Mini",category:"Bags",price:3900,change:5.8,trend:"up",meta:"Fondant · Intrecciato leather · Hobo",introduced:2020,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[2400,2700,3000,3250,3450,3650,3800,3900]}
+ ,{brand:"Dior",name:"Book Tote Medium",category:"Bags",price:3500,change:3.1,trend:"up",meta:"Blue Oblique · Embroidery · Tote",introduced:2018,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[2400,2600,2780,2950,3100,3250,3400,3500]}
+ ,{brand:"Chanel",name:"Boy Chanel Medium",category:"Bags",price:9000,change:6.5,trend:"up",meta:"Black · Quilted calfskin · Shoulder",introduced:2012,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[5200,5900,6500,7100,7600,8100,8600,9000]}
+ ,{brand:"Hermès",name:"Kelly 25",category:"Bags",price:28000,change:10.2,trend:"up",meta:"Gold · Epsom leather · Top handle",introduced:1935,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[15500,17500,19500,21500,23500,25000,26500,28000]}
+ ,{brand:"Gucci",name:"Jackie 1961 Small",category:"Bags",price:2200,change:3.8,trend:"up",meta:"Brown · Canvas · Shoulder",introduced:1961,image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",history:[1300,1450,1600,1750,1880,2000,2120,2200]}
+ ,{brand:"Gucci",name:"Dionysus Small",category:"Bags",price:2400,change:2.7,trend:"up",meta:"Beige · GG Supreme · Shoulder",introduced:2015,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[1700,1850,1950,2050,2150,2250,2350,2400]}
+ ,{brand:"Coach",name:"Rogue 39",category:"Bags",price:895,change:2.2,trend:"up",meta:"Black · Glovetanned leather · Tote",introduced:2016,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[620,680,730,770,810,845,875,895]}
+ ,{brand:"Longchamp",name:"Roseau Essential L",category:"Bags",price:1200,change:1.4,trend:"up",meta:"Cognac · Leather · Tote",introduced:1993,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[760,820,900,970,1040,1100,1160,1200]}
+ ,{brand:"Michael Kors",name:"SoHo Chain Shoulder Bag",category:"Bags",price:425,change:-1.1,trend:"down",meta:"Vanilla · Leather · Shoulder",introduced:2021,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[390,405,430,440,435,425]}
+ ,{brand:"Prada",name:"Cleo Brushed Leather",category:"Bags",price:2600,change:4.6,trend:"up",meta:"Black · Brushed leather · Shoulder",introduced:2021,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[2100,2250,2380,2480,2550,2600]}
+ ,{brand:"Dior",name:"Saddle Bag",category:"Bags",price:4500,change:5.4,trend:"up",meta:"Black · Grained calfskin · Shoulder",introduced:1999,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[2600,2900,3250,3600,3900,4200,4400,4500]}
+ ,{brand:"Fendi",name:"Peekaboo ISeeU Small",category:"Bags",price:5200,change:4.1,trend:"up",meta:"Greige · Leather · Top handle",introduced:2008,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[3400,3700,4000,4300,4550,4800,5050,5200]}
+ ,{brand:"Bottega Veneta",name:"Cassette",category:"Bags",price:2800,change:3.9,trend:"up",meta:"Parakeet · Intrecciato leather · Crossbody",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[1900,2100,2300,2450,2550,2650,2750,2800]}
 ];
 
 const brandSites={
@@ -566,6 +590,17 @@ const brandSites={
 function brandHome(p){return brandSites[p.brand].home}
 function productSearch(p){return brandSites[p.brand].search+encodeURIComponent(p.name)}
 function openBrand(brand){window.open(brandSites[brand].home,'_blank','noopener')}
+const galleryAlternatives=[
+ 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85',
+ 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85',
+ 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85'
+];
+function galleryFor(p){return [p.image,...galleryAlternatives].slice(0,4)}
+function selectGalleryImage(src){
+ const image=document.getElementById('detailMainImage');
+ if(image) image.src=src;
+ document.querySelectorAll('.gallery-thumb').forEach(thumb=>thumb.classList.toggle('active',thumb.dataset.src===src));
+}
 function historyYears(p){return Array.from({length:p.history.length},(_,i)=>p.introduced+i*(2026-p.introduced)/(p.history.length-1)).map(year=>Math.round(year))}
 function renderHistory(p){
  const values=p.history, years=historyYears(p), min=Math.min(...values), max=Math.max(...values), span=max-min||1;
@@ -643,7 +678,7 @@ function openProduct(i){
  const detailPoints=p.history.map((value,index)=>`${Math.round(index*900/(p.history.length-1))},${Math.round(205-(value-min)/span*175)}`).join(' ');
  document.getElementById('productPageContent').innerHTML=`
   <div class="product-hero">
-   <div class="product-hero-image"><img src="${p.image}" alt="${p.brand} ${p.name}"></div>
+  <div><div class="product-hero-image"><img id="detailMainImage" src="${p.image}" alt="${p.brand} ${p.name}"></div><div class="gallery-thumbs">${galleryFor(p).map((image,index)=>`<button class="gallery-thumb${index===0?' active':''}" data-src="${image}" onclick="selectGalleryImage('${image}')"><img src="${image}" alt="${p.brand} ${p.name} Ansicht ${index+1}"></button>`).join('')}</div></div>
    <div class="product-info"><div class="product-brand">${p.brand}</div><h1>${p.name}</h1><p class="product-description">${detailDescription(p)}</p><div class="product-meta">${p.meta} · eingeführt ${p.introduced}</div><div class="detail-price">${money(p.price)}</div><div class="${p.trend==='up'?'up':'down'}" style="font-size:11px;font-weight:700;margin-top:4px">${p.change>0?'+':''}${p.change}% gegenüber der letzten Erfassung</div><div class="detail-actions"><a href="${productSearch(p)}" target="_blank" rel="noopener">Auf offizieller Marke suchen</a><a class="secondary" href="${brandHome(p)}" target="_blank" rel="noopener">Markenhomepage</a></div></div>
   </div>
   <div class="detail-section"><h2>Preisvergleich weltweit</h2><div class="detail-grid"><div class="detail-panel"><h3>Wo ist ${p.name} am günstigsten?</h3><small>Vergleich nach Markt, vor individuellen Steuern und Versandkosten.</small><div class="offer-list">${offers.map(offer=>`<div class="offer"><div><strong>${offer.market}</strong><small>${offer.store} · ${offer.note}</small></div><div class="offer-price">${money(offer.price)}</div><a href="${brandHome(p)}" target="_blank" rel="noopener">Verfügbarkeit</a></div>`).join('')}</div></div><div class="detail-panel"><h3>Preisverlauf</h3><small>Seit ${p.introduced} bis heute</small><div class="detail-chart"><svg viewBox="0 0 900 220" preserveAspectRatio="none"><polyline points="${detailPoints} 900,220 0,220" fill="rgba(179,138,115,.18)" stroke="none"/><polyline points="${detailPoints}" fill="none" stroke="#8c6855" stroke-width="5"/></svg></div><div class="history-note">Niedrigster erfasster Vergleich: ${money(min)} · Günstigster aktueller Markt: ${money(lowest)}</div></div></div></div>`;
