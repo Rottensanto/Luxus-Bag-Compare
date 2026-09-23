@@ -625,8 +625,8 @@ const brandSites={
  Versace:{home:'https://www.versace.com/de/de/',search:'https://www.versace.com/de/de/search?q='},
  'Tom Ford':{home:'https://www.tomfordfashion.com/de-de/',search:'https://www.tomfordfashion.com/de-de/search?q='}
 };
-function brandHome(p){return brandSites[p.brand].home}
-function productSearch(p){return brandSites[p.brand].search+encodeURIComponent(p.name)}
+function brandHome(p){return (brandSites[p.brand]||{home:'https://www.google.com/search?q='+encodeURIComponent(p.brand+' official website')}).home}
+function productSearch(p){return (brandSites[p.brand]||{search:'https://www.google.com/search?q='+encodeURIComponent(p.brand+' '+p.name+' official product')}).search+encodeURIComponent(p.name)}
 function openBrand(brand){window.open(brandSites[brand].home,'_blank','noopener')}
 const galleryAlternatives=[
  'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85',
@@ -638,6 +638,24 @@ function selectGalleryImage(src){
  const image=document.getElementById('detailMainImage');
  if(image) image.src=src;
  document.querySelectorAll('.gallery-thumb').forEach(thumb=>thumb.classList.toggle('active',thumb.dataset.src===src));
+}
+function normalizeExternalProduct(item){
+ if(!item||!item.brand||!item.model||!Number.isFinite(Number(item.price_eur))||!item.image_url) return null;
+ const price=Math.round(Number(item.price_eur));
+ const year=Number(item.year)||2024;
+ return {brand:item.brand,name:item.model,category:'Bags',price,change:0,trend:'up',meta:`${item.color||'Colorway'} · ${item.material||'Material'} · ${item.category||'Handtasche'}`,introduced:year,image:item.image_url,description:item.description,history:[Math.round(price*.78),Math.round(price*.86),Math.round(price*.93),price],external:true};
+}
+async function loadExternalCatalog(){
+ try{
+  const response=await fetch('catalog/handbags.json');
+  if(!response.ok) throw new Error('catalog request failed');
+  const entries=await response.json();
+  if(Array.isArray(entries)) entries.map(normalizeExternalProduct).filter(Boolean).forEach(product=>{
+   if(!products.some(existing=>existing.brand===product.brand&&existing.name===product.name)) products.push(product);
+  });
+ }catch(error){console.warn('External catalog unavailable',error)}
+ renderProducts();
+ renderHistory(products[0]);
 }
 const modelCatalog={
  'Michael Kors':['Jet Set Travel Tote','Hamilton Legacy','Mercer Gallery','Soho Chain Shoulder','Bradshaw Satchel'],
@@ -700,7 +718,7 @@ function renderHistory(p){
 }
 
 function money(n){return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n)}
-function detailDescription(p){return `${p.brand} ${p.name} verbindet charakteristische Materialien und die typische Formsprache der Marke mit einer klaren Alltagsperspektive. Die Übersicht bündelt Produktdaten, Preisentwicklung und verfügbare offizielle Bezugsquellen für ${p.meta.toLowerCase()}.`}
+function detailDescription(p){return p.description||`${p.brand} ${p.name} verbindet charakteristische Materialien und die typische Formsprache der Marke mit einer klaren Alltagsperspektive. Die Übersicht bündelt Produktdaten, Preisentwicklung und verfügbare offizielle Bezugsquellen für ${p.meta.toLowerCase()}.`}
 function marketOffers(p){return [
  {market:'Italien',store:`${p.brand} Official Boutique`,price:Math.round(p.price*.965),note:'Niedrigster erfasster Markt'},
  {market:'Frankreich',store:`${p.brand} Official Boutique`,price:Math.round(p.price),note:'Europäischer Referenzpreis'},
@@ -804,8 +822,7 @@ document.addEventListener('click',()=>{
  void document.body.offsetWidth;
  document.body.classList.add('marble-pulse');
 });
-renderProducts();
-renderHistory(products[0]);
+loadExternalCatalog();
 </script>
 </body>
 </html>

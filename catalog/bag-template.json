@@ -1,0 +1,16 @@
+{
+  "brand": "Markenname",
+  "model": "Modellname",
+  "year": 2024,
+  "category": "Handtasche",
+  "size": {
+    "height_cm": 0,
+    "width_cm": 0,
+    "depth_cm": 0
+  },
+  "material": "Leder",
+  "color": "Schwarz",
+  "description": "Kurze professionelle Produktbeschreibung.",
+  "price_eur": 0,
+  "image_url": "https://example.com/image.png"
+}
