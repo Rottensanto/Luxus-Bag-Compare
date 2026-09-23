@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="LUXUS BAG COMPARE – globaler Preisvergleich für Luxusmode, Taschen, Parfüms, Schuhe, Uhren und Limited Editions.">
+<meta name="description" content="LUXUS BAG COMPARE – globaler Preisvergleich für Damen-Handtaschen von 100 bis 30.000 Euro.">
 <title>LUXUS BAG COMPARE — Global Fashion Price Intelligence</title>
 
 <style>
@@ -288,7 +288,7 @@ body.product-open main,body.product-open footer{display:none}body.product-open .
 <body>
 <div class="topbar">
   <div class="container">
-    <span>Global Fashion Price Intelligence</span>
+    <span>Global Handbag Price Intelligence</span>
     <span>Retail · Resale · Limited Editions · Historical Data</span>
   </div>
 </div>
@@ -321,7 +321,7 @@ body.product-open main,body.product-open footer{display:none}body.product-open .
     <div class="hero-copy">
       <div class="kicker">The global fashion price platform</div>
       <h1>Find the<br><em>real</em> price.</h1>
-      <p>Vergleiche Luxusmode, Taschen, Schuhe, Uhren, Parfüms und Limited Editions weltweit. Entdecke Händlerpreise, offizielle Retailpreise und historische Marktbewegungen.</p>
+      <p>Vergleiche Damen-Handtaschen aller Stilrichtungen und Preisklassen weltweit. Entdecke Einstiegsmodelle, Designer-Bestseller, ikonische Luxus-Taschen und Limited Editions.</p>
       <div class="search-box">
         <input id="searchInput" placeholder="Marke, Produkt, Modell oder Referenz suchen …" onkeydown="if(event.key==='Enter') runSearch()">
         <button class="search-btn" onclick="runSearch()">Marke suchen</button>
@@ -331,7 +331,7 @@ body.product-open main,body.product-open footer{display:none}body.product-open .
         <button class="chip" onclick="quickSearch('Louis Vuitton')">Louis Vuitton</button>
         <button class="chip" onclick="quickSearch('Hermès')">Hermès</button>
         <button class="chip" onclick="quickSearch('Dior')">Dior</button>
-        <button class="chip" onclick="quickSearch('Limited Edition')">Limited Editions</button>
+        <button class="chip" onclick="quickSearch('Coach')">Coach</button>
       </div>
     </div>
 
@@ -348,16 +348,16 @@ body.product-open main,body.product-open footer{display:none}body.product-open .
 <section class="section" id="categories">
   <div class="container">
     <div class="section-head">
-      <div><div class="kicker">Explore</div><h2>Fashion Categories</h2></div>
-      <p>Von ikonischen Taschen bis zu seltenen Editionen.</p>
+      <div><div class="kicker">Explore</div><h2>Handbag Categories</h2></div>
+      <p>Von Everyday-Totes bis zu seltenen Sammler-Taschen.</p>
     </div>
     <div class="grid categories">
-      <a class="cat" href="#products" onclick="filterCategory('Bags')"><span class="num">01</span><strong>Bags</strong><span>Compare prices →</span></a>
-      <a class="cat" href="#products" onclick="filterCategory('Shoes')"><span class="num">02</span><strong>Shoes</strong><span>Compare prices →</span></a>
-      <a class="cat" href="#products" onclick="filterCategory('Watches')"><span class="num">03</span><strong>Watches</strong><span>Compare prices →</span></a>
-      <a class="cat" href="#products" onclick="filterCategory('Jewelry')"><span class="num">04</span><strong>Jewelry</strong><span>Compare prices →</span></a>
-      <a class="cat" href="#products" onclick="filterCategory('Perfume')"><span class="num">05</span><strong>Perfume</strong><span>Compare prices →</span></a>
-      <a class="cat" href="#limited" onclick="filterCategory('Limited')"><span class="num">06</span><strong>Limited</strong><span>Track value →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Bags')"><span class="num">01</span><strong>Everyday</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Bags')"><span class="num">02</span><strong>Shoulder</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Bags')"><span class="num">03</span><strong>Tote</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Bags')"><span class="num">04</span><strong>Crossbody</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Bags')"><span class="num">05</span><strong>Mini Bags</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#limited" onclick="filterCategory('Bags')"><span class="num">06</span><strong>Limited</strong><span>Track value →</span></a>
     </div>
   </div>
 </section>
@@ -381,9 +381,9 @@ body.product-open main,body.product-open footer{display:none}body.product-open .
     </div>
 
     <div class="toolbar">
-      <input id="productFilter" placeholder="Produkte filtern …" oninput="renderProducts()">
+      <input id="productFilter" placeholder="Damen-Handtaschen filtern …" oninput="renderProducts()">
       <select id="categoryFilter" onchange="renderProducts()">
-        <option value="">All categories</option><option>Bags</option><option>Shoes</option><option>Watches</option><option>Jewelry</option><option>Perfume</option>
+        <option value="">Alle Handtaschen</option><option value="Bags">Handtaschen</option>
       </select>
       <select id="trendFilter" onchange="renderProducts()">
         <option value="">All trends</option><option value="up">Rising</option><option value="down">Falling</option>
@@ -507,7 +507,7 @@ body.product-open main,body.product-open footer{display:none}body.product-open .
         <p>Vergleichen & das beste Angebot finden. Eine unabhängige Fashion-Price-Intelligence-Plattform — nicht selbst als Händler tätig.</p>
       </div>
       <div><h3>Explore</h3><a href="#products">Products</a><a href="#market">Global Market</a><a href="#limited">Limited Editions</a><a href="#history">Price History</a></div>
-      <div><h3>Categories</h3><a href="#products">Bags</a><a href="#products">Shoes</a><a href="#products">Watches</a><a href="#products">Perfume</a></div>
+      <div><h3>Categories</h3><a href="#products">Everyday Bags</a><a href="#products">Shoulder Bags</a><a href="#products">Totes</a><a href="#products">Limited Bags</a></div>
       <div><h3>Platform</h3><a href="#">About</a><a href="#">Data Sources</a><a href="#">Privacy</a><a href="#">Terms</a></div>
     </div>
     <div class="copyright">© 2026 LUXUS BAG COMPARE · Quellen und Preisreihen je Artikel verknüpft</div>
@@ -526,18 +526,19 @@ body.product-open main,body.product-open footer{display:none}body.product-open .
 
 <script>
 const products=[
- {brand:"Chanel",name:"Classic Flap Medium",category:"Bags",price:10500,change:7.8,trend:"up",meta:"Black · Caviar · Medium",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[6700,7200,7800,8400,8900,9500,9800,10500]},
- {brand:"Louis Vuitton",name:"Neverfull MM",category:"Bags",price:1650,change:3.2,trend:"up",meta:"Monogram · Canvas · MM",introduced:2007,image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",history:[890,980,1100,1240,1380,1480,1599,1650]},
- {brand:"Hermès",name:"Birkin 25",category:"Bags",price:12800,change:11.4,trend:"up",meta:"Gold · Togo · 25cm",introduced:1984,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[7800,8200,8700,9200,10100,11200,11900,12800]},
- {brand:"Dior",name:"Lady Dior",category:"Bags",price:5900,change:-1.9,trend:"down",meta:"Black · Cannage · Medium",introduced:1995,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[4100,4300,4700,5100,5600,6000,6015,5900]},
- {brand:"Gucci",name:"Ace Sneaker",category:"Shoes",price:790,change:2.4,trend:"up",meta:"White · Leather · EU 39",introduced:2016,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",history:[490,530,580,620,680,720,760,790]},
- {brand:"Prada",name:"Monolith Loafer",category:"Shoes",price:1050,change:-3.5,trend:"down",meta:"Black · Brushed leather",introduced:2019,image:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85",history:[850,880,930,980,1040,1090,1088,1050]},
- {brand:"Rolex",name:"Datejust 36",category:"Watches",price:9200,change:5.7,trend:"up",meta:"Steel · Automatic · 36mm",introduced:1945,image:"https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=85",history:[7200,7500,7800,8100,8400,8600,8700,9200]},
- {brand:"Cartier",name:"Love Bracelet",category:"Jewelry",price:7550,change:4.1,trend:"up",meta:"Yellow gold · Classic",introduced:1969,image:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85",history:[4800,5200,5600,6100,6500,6900,7250,7550]},
- {brand:"Dior",name:"Sauvage Elixir",category:"Perfume",price:168,change:-2.1,trend:"down",meta:"60ml · Eau de Parfum",introduced:2021,image:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85",history:[140,145,158,172,168]},
- {brand:"Chanel",name:"Coco Mademoiselle",category:"Perfume",price:145,change:1.8,trend:"up",meta:"100ml · Eau de Parfum",introduced:2001,image:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=900&q=85",history:[88,95,105,112,120,128,138,145]},
- {brand:"Bottega Veneta",name:"Andiamo",category:"Bags",price:4200,change:6.3,trend:"up",meta:"Fondant · Calfskin",introduced:2023,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[3200,3700,3950,4200]},
- {brand:"Van Cleef & Arpels",name:"Alhambra Pendant",category:"Jewelry",price:3650,change:8.2,trend:"up",meta:"Mother of pearl · Gold",introduced:1968,image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=85",history:[1800,2100,2450,2800,3100,3350,3500,3650]}
+ {brand:"Longchamp",name:"Le Pliage Original M",category:"Bags",price:125,change:2.4,trend:"up",meta:"Navy · Recycled canvas · Tote",introduced:1993,image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",history:[79,88,96,105,112,118,122,125]},
+ {brand:"Michael Kors",name:"Jet Set Travel Tote",category:"Bags",price:295,change:1.8,trend:"up",meta:"Black · Saffiano leather · Tote",introduced:2014,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[220,235,248,265,280,288,290,295]},
+ {brand:"Coach",name:"Tabby Shoulder Bag 26",category:"Bags",price:550,change:4.2,trend:"up",meta:"Chalk · Polished pebble leather · Shoulder",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[395,420,455,480,510,525,540,550]},
+ {brand:"Longchamp",name:"Roseau Essential XS",category:"Bags",price:690,change:-1.2,trend:"down",meta:"Cognac · Leather · Top handle",introduced:2020,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[620,640,675,700,695,690]},
+ {brand:"Jacquemus",name:"Le Chiquito Moyen",category:"Bags",price:790,change:3.6,trend:"up",meta:"Beige · Calf leather · Mini bag",introduced:2018,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[450,510,590,650,710,760,790]},
+ {brand:"Prada",name:"Re-Edition 2005",category:"Bags",price:2100,change:5.1,trend:"up",meta:"Black · Re-Nylon · Shoulder",introduced:2019,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[1450,1550,1680,1810,1900,2010,2100]},
+ {brand:"Louis Vuitton",name:"Neverfull MM",category:"Bags",price:1650,change:3.2,trend:"up",meta:"Monogram · Canvas · Tote",introduced:2007,image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",history:[890,980,1100,1240,1380,1480,1599,1650]},
+ {brand:"Fendi",name:"Baguette Medium",category:"Bags",price:3200,change:6.8,trend:"up",meta:"Brown · FF jacquard · Shoulder",introduced:1997,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[1700,1950,2200,2450,2700,2900,3070,3200]},
+ {brand:"Bottega Veneta",name:"Andiamo",category:"Bags",price:4200,change:6.3,trend:"up",meta:"Fondant · Calfskin · Top handle",introduced:2023,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",history:[3200,3700,3950,4200]},
+ {brand:"Dior",name:"Lady Dior Medium",category:"Bags",price:5900,change:-1.9,trend:"down",meta:"Black · Cannage · Top handle",introduced:1995,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",history:[4100,4300,4700,5100,5600,6000,6015,5900]},
+ {brand:"Chanel",name:"Classic Flap Medium",category:"Bags",price:10500,change:7.8,trend:"up",meta:"Black · Caviar · Shoulder",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[6700,7200,7800,8400,8900,9500,9800,10500]},
+ {brand:"Hermès",name:"Birkin 25",category:"Bags",price:12800,change:11.4,trend:"up",meta:"Gold · Togo · Top handle",introduced:1984,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=85",history:[7800,8200,8700,9200,10100,11200,11900,12800]},
+ {brand:"Chanel",name:"Classic Flap Maxi",category:"Bags",price:30000,change:9.6,trend:"up",meta:"Black · Quilted lambskin · Shoulder",introduced:2019,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",history:[19000,21000,22500,24000,26000,27500,29000,30000]}
 ];
 
 const brandSites={
@@ -550,7 +551,12 @@ const brandSites={
  Rolex:{home:'https://www.rolex.com/de',search:'https://www.rolex.com/de/search?query='},
  Cartier:{home:'https://www.cartier.com/de-de/',search:'https://www.cartier.com/de-de/search?text='},
  'Bottega Veneta':{home:'https://www.bottegaveneta.com/de-de',search:'https://www.bottegaveneta.com/de-de/search?query='},
- 'Van Cleef & Arpels':{home:'https://www.vancleefarpels.com/de/de/home.html',search:'https://www.vancleefarpels.com/de/de/search.html?text='}
+ 'Van Cleef & Arpels':{home:'https://www.vancleefarpels.com/de/de/home.html',search:'https://www.vancleefarpels.com/de/de/search.html?text='},
+ 'Michael Kors':{home:'https://www.michaelkors.de/',search:'https://www.michaelkors.de/search?q='},
+ Longchamp:{home:'https://www.longchamp.com/de/de/',search:'https://www.longchamp.com/de/de/search?q='},
+ Jacquemus:{home:'https://www.jacquemus.com/de_de/',search:'https://www.jacquemus.com/de_de/search?q='},
+ Fendi:{home:'https://www.fendi.com/de-de/',search:'https://www.fendi.com/de-de/search?q='},
+ Coach:{home:'https://de.coach.com/de_DE',search:'https://de.coach.com/de_DE/search?q='}
 };
 function brandHome(p){return brandSites[p.brand].home}
 function productSearch(p){return brandSites[p.brand].search+encodeURIComponent(p.name)}
