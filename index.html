@@ -243,6 +243,27 @@ button{cursor:pointer}
 .result small{display:block;color:var(--soft);font-size:9px;margin-top:3px}
 .source-link{color:var(--rose-dark);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
 .history-note{font-size:10px;color:var(--soft);margin-top:12px}
+.product-page{padding:42px 0 80px;background:rgba(247,246,242,.72);min-height:calc(100vh - 116px)}
+.product-page-inner{width:min(1380px,92%);margin:auto}
+.back-button{border:0;background:transparent;padding:8px 0;color:var(--soft);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.back-button:hover{color:var(--ink)}
+.product-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:54px;align-items:start;margin-top:25px}
+.product-hero-image{height:min(650px,68vw);min-height:420px;background:#e9e5dd;overflow:hidden}
+.product-hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.product-info{padding:24px 0}.product-info .product-brand{font-size:11px}
+.product-info h1{font-family:"Cormorant Garamond",serif;font-size:clamp(46px,6vw,82px);font-weight:500;line-height:.9;margin:14px 0 20px;letter-spacing:0}
+.product-description{max-width:520px;color:var(--soft);font-size:14px;line-height:1.8}
+.detail-price{font-family:"Cormorant Garamond",serif;font-size:42px;margin-top:28px}
+.detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.detail-actions a{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;background:var(--ink);color:#fff;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.detail-actions a.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.detail-section{margin-top:66px}.detail-section h2{font-family:"Cormorant Garamond",serif;font-size:42px;font-weight:500;margin:0 0 18px}
+.detail-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.detail-panel{border:1px solid var(--line);background:rgba(255,255,255,.7);padding:24px}.detail-panel h3{font-family:"Cormorant Garamond",serif;font-size:29px;font-weight:500;margin:0 0 4px}
+.offer-list{display:grid;gap:1px;background:var(--line);margin-top:18px}
+.offer{display:grid;grid-template-columns:1fr auto auto;gap:18px;align-items:center;background:#fff;padding:15px}.offer strong{font-size:12px;font-weight:600}.offer small{display:block;color:var(--soft);font-size:10px;margin-top:4px}.offer-price{font-family:"Cormorant Garamond",serif;font-size:23px}.offer a{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--rose-dark)}
+.detail-chart{height:220px;margin-top:18px}.detail-chart svg{width:100%;height:100%}
+body.product-open main,body.product-open footer{display:none}body.product-open .nav{position:relative}
 
 @media(max-width:1100px){
   .menu{display:none}.mobile-menu{display:block}
@@ -250,6 +271,7 @@ button{cursor:pointer}
   .categories{grid-template-columns:repeat(3,1fr)}
   .products{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
+  .product-hero,.detail-grid{grid-template-columns:1fr}
 }
 @media(max-width:650px){
   .topbar{display:none}.nav-inner{height:68px}.brand{min-width:0}.brand-text{display:none}
@@ -258,6 +280,7 @@ button{cursor:pointer}
   .section-head{display:block}.section-head h2{font-size:35px;margin-bottom:6px}
   .search-box{display:block;background:#fff}.search-box input{width:100%}.search-btn{width:100%}
   .nav-actions .outline-btn{display:none}
+  .product-page{padding-top:25px}.product-hero-image{min-height:330px;height:105vw}.product-info{padding-top:4px}.detail-section{margin-top:44px}.offer{grid-template-columns:1fr auto}.offer a{grid-column:2;grid-row:1}.offer-price{grid-column:2;grid-row:1}
 }
 </style>
 </head>
@@ -469,6 +492,13 @@ button{cursor:pointer}
 </section>
 </main>
 
+<section class="product-page" id="productPage" aria-hidden="true">
+  <div class="product-page-inner">
+    <button class="back-button" onclick="closeProductPage()">← Zur Übersicht</button>
+    <div id="productPageContent"></div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -542,22 +572,30 @@ function renderHistory(p){
 }
 
 function money(n){return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n)}
+function detailDescription(p){return `${p.brand} ${p.name} verbindet charakteristische Materialien und die typische Formsprache der Marke mit einer klaren Alltagsperspektive. Die Übersicht bündelt Produktdaten, Preisentwicklung und verfügbare offizielle Bezugsquellen für ${p.meta.toLowerCase()}.`}
+function marketOffers(p){return [
+ {market:'Italien',store:`${p.brand} Official Boutique`,price:Math.round(p.price*.965),note:'Niedrigster erfasster Markt'},
+ {market:'Frankreich',store:`${p.brand} Official Boutique`,price:Math.round(p.price),note:'Europäischer Referenzpreis'},
+ {market:'Deutschland',store:`${p.brand} Official Boutique`,price:Math.round(p.price*1.01),note:'Lokale Verfügbarkeit prüfen'},
+ {market:'USA',store:`${p.brand} Official Boutique`,price:Math.round(p.price*1.12),note:'Vor Steuern und Import'},
+ {market:'Japan',store:`${p.brand} Official Boutique`,price:Math.round(p.price*1.08),note:'Lokale Währung im Shop'}
+]}
 function renderProducts(){
  const q=document.getElementById('productFilter').value.toLowerCase();
  const c=document.getElementById('categoryFilter').value;
  const t=document.getElementById('trendFilter').value;
  const list=products.filter(p=>(!q||(p.brand+" "+p.name+" "+p.meta).toLowerCase().includes(q))&&(!c||p.category===c)&&(!t||p.trend===t));
- document.getElementById('productGrid').innerHTML=list.map((p,i)=>`
-  <article class="product">
-    <div class="product-img"><img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy"><span class="badge">${p.category}</span><a href="${brandHome(p)}" target="_blank" rel="noopener">Marke</a></div>
+ document.getElementById('productGrid').innerHTML=list.map(p=>`
+  <article class="product" tabindex="0" role="button" onclick="openProduct(${products.indexOf(p)})" onkeydown="if(event.key==='Enter'||event.key===' ')openProduct(${products.indexOf(p)})">
+    <div class="product-img"><img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy"><span class="badge">${p.category}</span><a href="${brandHome(p)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Marke</a></div>
     <div class="product-body">
       <div class="product-brand">${p.brand}</div>
       <h3>${p.name}</h3>
       <div class="product-meta">${p.meta}</div>
       <div class="price-row"><div class="price">${money(p.price)}</div><div class="change ${p.trend==='up'?'up':'down'}">${p.change>0?'+':''}${p.change}%</div></div>
       <div class="product-actions">
-        <button class="primary" onclick="addCompare(${products.indexOf(p)})">Compare</button>
-        <button onclick="openProduct(${products.indexOf(p)})">Details</button>
+        <button class="primary" onclick="event.stopPropagation();addCompare(${products.indexOf(p)})">Compare</button>
+        <button onclick="event.stopPropagation();openProduct(${products.indexOf(p)})">Details</button>
       </div>
     </div>
   </article>`).join('') || '<div class="panel" style="grid-column:1/-1">Keine Produkte gefunden.</div>';
@@ -565,7 +603,14 @@ function renderProducts(){
 function filterCategory(cat){document.getElementById('categoryFilter').value=cat;setTimeout(renderProducts,50)}
 function resetFilters(){document.getElementById('productFilter').value='';document.getElementById('categoryFilter').value='';document.getElementById('trendFilter').value='';renderProducts()}
 function quickSearch(q){document.getElementById('searchInput').value=q;runSearch()}
-function runSearch(){openSearchResults(document.getElementById('searchInput').value.trim()||'Fashion')}
+function runSearch(){
+ const query=document.getElementById('searchInput').value.trim();
+ document.getElementById('productFilter').value=query;
+ document.getElementById('categoryFilter').value='';
+ document.getElementById('trendFilter').value='';
+ renderProducts();
+ document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'});
+}
 function openSearchResults(q){
  const query=q.toLowerCase();
  const exactBrand=Object.keys(brandSites).find(brand=>brand.toLowerCase()===query);
@@ -582,23 +627,28 @@ function openSearchResults(q){
 }
 function openProduct(i){
  const p=products[i];
- document.getElementById('modalContent').innerHTML=`
-  <div style="display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:start;margin-top:22px;">
-  <div class="product-img" style="height:180px;border-radius:16px"><img src="${p.image}" alt="${p.brand} ${p.name}"><a href="${brandHome(p)}" target="_blank" rel="noopener">Marke</a></div>
-   <div><div class="product-brand">${p.brand}</div><h2 style="font-family:'Cormorant Garamond';font-size:36px;margin:5px 0">${p.name}</h2>
-   <p style="color:var(--soft);font-size:12px">${p.meta}</p><div style="font-family:'Cormorant Garamond';font-size:42px">${money(p.price)}</div>
-   <div class="${p.trend==='up'?'up':'down'}" style="font-size:11px;font-weight:700;margin-top:4px">${p.change>0?'+':''}${p.change}% market movement</div></div>
+ const offers=marketOffers(p), lowest=Math.min(...offers.map(offer=>offer.price));
+ const min=Math.min(...p.history), max=Math.max(...p.history), span=max-min||1;
+ const detailPoints=p.history.map((value,index)=>`${Math.round(index*900/(p.history.length-1))},${Math.round(205-(value-min)/span*175)}`).join(' ');
+ document.getElementById('productPageContent').innerHTML=`
+  <div class="product-hero">
+   <div class="product-hero-image"><img src="${p.image}" alt="${p.brand} ${p.name}"></div>
+   <div class="product-info"><div class="product-brand">${p.brand}</div><h1>${p.name}</h1><p class="product-description">${detailDescription(p)}</p><div class="product-meta">${p.meta} · eingeführt ${p.introduced}</div><div class="detail-price">${money(p.price)}</div><div class="${p.trend==='up'?'up':'down'}" style="font-size:11px;font-weight:700;margin-top:4px">${p.change>0?'+':''}${p.change}% gegenüber der letzten Erfassung</div><div class="detail-actions"><a href="${productSearch(p)}" target="_blank" rel="noopener">Auf offizieller Marke suchen</a><a class="secondary" href="${brandHome(p)}" target="_blank" rel="noopener">Markenhomepage</a></div></div>
   </div>
-  <div class="market-cards" style="margin-top:22px">
-   <div class="market-card"><span>Lowest retailer</span><b>${money(Math.round(p.price*.965))}</b></div>
-   <div class="market-card"><span>Average market</span><b>${money(p.price)}</b></div>
-   <div class="market-card"><span>Highest retailer</span><b>${money(Math.round(p.price*1.12))}</b></div>
-   </div>
-  <p class="history-note">Marktstart: ${p.introduced}. <a class="source-link" href="${productSearch(p)}" target="_blank" rel="noopener">Produkt auf offizieller Marke suchen</a></p>`;
- renderHistory(p);
- document.getElementById('marketProductLabel').textContent=`${p.brand} ${p.name} · aktuelle Quellen`;
- document.getElementById('modal').classList.add('open');
+  <div class="detail-section"><h2>Preisvergleich weltweit</h2><div class="detail-grid"><div class="detail-panel"><h3>Wo ist ${p.name} am günstigsten?</h3><small>Vergleich nach Markt, vor individuellen Steuern und Versandkosten.</small><div class="offer-list">${offers.map(offer=>`<div class="offer"><div><strong>${offer.market}</strong><small>${offer.store} · ${offer.note}</small></div><div class="offer-price">${money(offer.price)}</div><a href="${brandHome(p)}" target="_blank" rel="noopener">Verfügbarkeit</a></div>`).join('')}</div></div><div class="detail-panel"><h3>Preisverlauf</h3><small>Seit ${p.introduced} bis heute</small><div class="detail-chart"><svg viewBox="0 0 900 220" preserveAspectRatio="none"><polyline points="${detailPoints} 900,220 0,220" fill="rgba(179,138,115,.18)" stroke="none"/><polyline points="${detailPoints}" fill="none" stroke="#8c6855" stroke-width="5"/></svg></div><div class="history-note">Niedrigster erfasster Vergleich: ${money(min)} · Günstigster aktueller Markt: ${money(lowest)}</div></div></div></div>`;
+ document.body.classList.add('product-open');
+ document.getElementById('productPage').setAttribute('aria-hidden','false');
+ history.pushState({product:i},'',`#product-${i}`);
+ window.scrollTo({top:0,behavior:'smooth'});
 }
+function closeProductPage(fromHistory=false){
+ document.body.classList.remove('product-open');
+ document.getElementById('productPage').setAttribute('aria-hidden','true');
+ if(!fromHistory&&location.hash.startsWith('#product-')) history.back();
+}
+window.addEventListener('popstate',()=>{
+ if(!location.hash.startsWith('#product-')) closeProductPage(true);
+});
 let compare=[];
 function addCompare(i){
  if(!compare.includes(i)&&compare.length<3) compare.push(i);
