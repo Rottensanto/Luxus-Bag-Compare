@@ -301,7 +301,7 @@ button{cursor:pointer}
       <p>Vergleiche Luxusmode, Taschen, Schuhe, Uhren, Parfüms und Limited Editions weltweit. Entdecke Händlerpreise, offizielle Retailpreise und historische Marktbewegungen.</p>
       <div class="search-box">
         <input id="searchInput" placeholder="Marke, Produkt, Modell oder Referenz suchen …" onkeydown="if(event.key==='Enter') runSearch()">
-        <button class="search-btn" onclick="runSearch()">Search Market</button>
+        <button class="search-btn" onclick="runSearch()">Marke suchen</button>
       </div>
       <div class="quick">
         <button class="chip" onclick="quickSearch('Chanel')">Chanel</button>
@@ -402,7 +402,7 @@ button{cursor:pointer}
           <div class="market-card"><span>Highest</span><b>€11,900</b></div>
           <div class="market-card"><span>Market spread</span><b>+17.2%</b></div>
         </div>
-        <button class="search-btn" style="width:100%;margin-top:16px" onclick="openSearchResults('Chanel')">Google Shopping öffnen</button>
+        <button class="search-btn" style="width:100%;margin-top:16px" onclick="openBrand('Chanel')">Chanel Homepage öffnen</button>
       </div>
     </div>
   </div>
@@ -510,8 +510,21 @@ const products=[
  {brand:"Van Cleef & Arpels",name:"Alhambra Pendant",category:"Jewelry",price:3650,change:8.2,trend:"up",meta:"Mother of pearl · Gold",introduced:1968,image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=85",history:[1800,2100,2450,2800,3100,3350,3500,3650]}
 ];
 
-function googleUrl(p){return 'https://www.google.com/search?tbm=shop&q='+encodeURIComponent(p.brand+' '+p.name)}
-function sourceUrl(p){return 'https://www.google.com/search?q='+encodeURIComponent(p.brand+' '+p.name+' official retailer')}
+const brandSites={
+ Chanel:{home:'https://www.chanel.com/de/',search:'https://www.chanel.com/de/search/?q='},
+ 'Louis Vuitton':{home:'https://de.louisvuitton.com/de-de/homepage',search:'https://de.louisvuitton.com/de-de/search?search='},
+ 'Hermès':{home:'https://www.hermes.com/de/de/',search:'https://www.hermes.com/de/de/search/?query='},
+ Dior:{home:'https://www.dior.com/de_de/fashion',search:'https://www.dior.com/de_de/search?query='},
+ Gucci:{home:'https://www.gucci.com/de/de/',search:'https://www.gucci.com/de/de/search?q='},
+ Prada:{home:'https://www.prada.com/de/de.html',search:'https://www.prada.com/de/de/search.html?query='},
+ Rolex:{home:'https://www.rolex.com/de',search:'https://www.rolex.com/de/search?query='},
+ Cartier:{home:'https://www.cartier.com/de-de/',search:'https://www.cartier.com/de-de/search?text='},
+ 'Bottega Veneta':{home:'https://www.bottegaveneta.com/de-de',search:'https://www.bottegaveneta.com/de-de/search?query='},
+ 'Van Cleef & Arpels':{home:'https://www.vancleefarpels.com/de/de/home.html',search:'https://www.vancleefarpels.com/de/de/search.html?text='}
+};
+function brandHome(p){return brandSites[p.brand].home}
+function productSearch(p){return brandSites[p.brand].search+encodeURIComponent(p.name)}
+function openBrand(brand){window.open(brandSites[brand].home,'_blank','noopener')}
 function historyYears(p){return Array.from({length:p.history.length},(_,i)=>p.introduced+i*(2026-p.introduced)/(p.history.length-1)).map(year=>Math.round(year))}
 function renderHistory(p){
  const values=p.history, years=historyYears(p), min=Math.min(...values), max=Math.max(...values), span=max-min||1;
@@ -536,7 +549,7 @@ function renderProducts(){
  const list=products.filter(p=>(!q||(p.brand+" "+p.name+" "+p.meta).toLowerCase().includes(q))&&(!c||p.category===c)&&(!t||p.trend===t));
  document.getElementById('productGrid').innerHTML=list.map((p,i)=>`
   <article class="product">
-    <div class="product-img"><img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy"><span class="badge">${p.category}</span><a href="${googleUrl(p)}" target="_blank" rel="noopener">Google</a></div>
+    <div class="product-img"><img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy"><span class="badge">${p.category}</span><a href="${brandHome(p)}" target="_blank" rel="noopener">Marke</a></div>
     <div class="product-body">
       <div class="product-brand">${p.brand}</div>
       <h3>${p.name}</h3>
@@ -552,21 +565,26 @@ function renderProducts(){
 function filterCategory(cat){document.getElementById('categoryFilter').value=cat;setTimeout(renderProducts,50)}
 function resetFilters(){document.getElementById('productFilter').value='';document.getElementById('categoryFilter').value='';document.getElementById('trendFilter').value='';renderProducts()}
 function quickSearch(q){document.getElementById('searchInput').value=q;runSearch()}
-function runSearch(){openSearchResults(document.getElementById('searchInput').value||'Fashion')}
+function runSearch(){openSearchResults(document.getElementById('searchInput').value.trim()||'Fashion')}
 function openSearchResults(q){
- const matches=products.filter(p=>(p.brand+" "+p.name+" "+p.category).toLowerCase().includes(q.toLowerCase()));
+ const query=q.toLowerCase();
+ const exactBrand=Object.keys(brandSites).find(brand=>brand.toLowerCase()===query);
+ const matches=products.filter(p=>(p.brand+" "+p.name+" "+p.category).toLowerCase().includes(query));
+ const content=exactBrand?`
+   <div class="result"><div><b>${exactBrand}</b><small>Offizielle Markenhomepage · ${products.filter(p=>p.brand===exactBrand).length} Katalogprodukte</small></div><a class="source-link" href="${brandSites[exactBrand].home}" target="_blank" rel="noopener">Homepage öffnen</a></div>`:
+   (matches.length?matches.map(p=>`
+    <div class="result"><div><b>${p.brand} — ${p.name}</b><small>${p.category} · ${p.meta} · Marktstart ${p.introduced}</small></div><a class="source-link" href="${productSearch(p)}" target="_blank" rel="noopener">Produkt auf Marke suchen</a></div>`).join(''):'<div class="panel">Keine Marke oder kein Produkt im Katalog gefunden.</div>');
  document.getElementById('modalContent').innerHTML=`
-  <p style="color:var(--soft);font-size:12px;">Suchbegriff: <b>${q}</b> · ${matches.length} Treffer aus dem geprüften Katalog</p>
-   <div class="result-list">${(matches.length?matches:products.slice(0,5)).map(p=>`
-    <div class="result"><div><b>${p.brand} — ${p.name}</b><small>${p.category} · ${p.meta} · Marktstart ${p.introduced}</small></div><a class="source-link" href="${googleUrl(p)}" target="_blank" rel="noopener">Google Shopping</a></div>`).join('')}</div>
-     <p style="font-size:10px;color:var(--soft);margin-top:18px;">Google Shopping öffnet die passende Artikelsuche direkt. Preise und Verfügbarkeit werden beim Händler geprüft.</p>`;
+  <p style="color:var(--soft);font-size:12px;">Suchbegriff: <b>${q}</b> · ${exactBrand?'Marke gefunden':matches.length+' Produkttreffer'}</p>
+   <div class="result-list">${content}</div>
+   <p style="font-size:10px;color:var(--soft);margin-top:18px;">Die Markensuche öffnet nur die offizielle Homepage. Ein konkreter Produkttreffer führt zur Produktsuche der offiziellen Marke.</p>`;
  document.getElementById('modal').classList.add('open');
 }
 function openProduct(i){
  const p=products[i];
  document.getElementById('modalContent').innerHTML=`
   <div style="display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:start;margin-top:22px;">
-  <div class="product-img" style="height:180px;border-radius:16px"><img src="${p.image}" alt="${p.brand} ${p.name}"><a href="${googleUrl(p)}" target="_blank" rel="noopener">Google</a></div>
+  <div class="product-img" style="height:180px;border-radius:16px"><img src="${p.image}" alt="${p.brand} ${p.name}"><a href="${brandHome(p)}" target="_blank" rel="noopener">Marke</a></div>
    <div><div class="product-brand">${p.brand}</div><h2 style="font-family:'Cormorant Garamond';font-size:36px;margin:5px 0">${p.name}</h2>
    <p style="color:var(--soft);font-size:12px">${p.meta}</p><div style="font-family:'Cormorant Garamond';font-size:42px">${money(p.price)}</div>
    <div class="${p.trend==='up'?'up':'down'}" style="font-size:11px;font-weight:700;margin-top:4px">${p.change>0?'+':''}${p.change}% market movement</div></div>
@@ -576,7 +594,7 @@ function openProduct(i){
    <div class="market-card"><span>Average market</span><b>${money(p.price)}</b></div>
    <div class="market-card"><span>Highest retailer</span><b>${money(Math.round(p.price*1.12))}</b></div>
    </div>
-  <p class="history-note">Marktstart: ${p.introduced}. <a class="source-link" href="${sourceUrl(p)}" target="_blank" rel="noopener">Quellen bei Google prüfen</a></p>`;
+  <p class="history-note">Marktstart: ${p.introduced}. <a class="source-link" href="${productSearch(p)}" target="_blank" rel="noopener">Produkt auf offizieller Marke suchen</a></p>`;
  renderHistory(p);
  document.getElementById('marketProductLabel').textContent=`${p.brand} ${p.name} · aktuelle Quellen`;
  document.getElementById('modal').classList.add('open');
