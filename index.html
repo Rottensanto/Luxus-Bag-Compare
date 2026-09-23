@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LUXUS BAG COMPARE – globaler Preisvergleich für Luxusmode, Taschen, Parfüms, Schuhe, Uhren und Limited Editions.">
+<title>LUXUS BAG COMPARE — Global Fashion Price Intelligence</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --ink:#171716;
+  --soft:#5d5b57;
+  --line:rgba(23,23,22,.12);
+  --paper:#f7f6f2;
+  --paper2:#efeee9;
+  --white:#fff;
+  --rose:#b38a73;
+  --rose-dark:#8c6855;
+  --gold:#b69a6a;
+  --green:#426653;
+  --red:#8b4f4f;
+  --shadow:0 24px 60px rgba(30,27,22,.12);
+  --radius:22px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:Inter,Arial,sans-serif;
+  background:
+    linear-gradient(rgba(255,255,255,.78),rgba(255,255,255,.78)),
+    radial-gradient(circle at 20% 10%, rgba(140,140,140,.18) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 40%, rgba(100,100,100,.12) 0 1px, transparent 2px),
+    linear-gradient(125deg,#fdfcf9,#ecebe6 45%,#faf9f6);
+  background-size:auto, 19px 23px, 27px 31px, auto;
+}
+body:before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:-1;
+  opacity:.18;
+  background:
+    linear-gradient(122deg,transparent 0 18%,rgba(80,80,75,.16) 18.2% 18.45%,transparent 18.7%),
+    linear-gradient(67deg,transparent 0 46%,rgba(80,80,75,.11) 46.2% 46.45%,transparent 46.7%),
+    linear-gradient(158deg,transparent 0 72%,rgba(80,80,75,.10) 72.2% 72.4%,transparent 72.7%);
+}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.container{width:min(1440px,92%);margin:auto}
+.topbar{
+  height:34px;background:#171716;color:#fff;display:flex;align-items:center;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+}
+.topbar .container{display:flex;justify-content:space-between}
+.topbar span{opacity:.72}
+
+.nav{
+  position:sticky;top:0;z-index:30;
+  background:rgba(247,246,242,.88);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{height:82px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:12px;min-width:245px}
+.brand-mark{
+  width:48px;height:48px;border-radius:50%;overflow:hidden;border:1px solid var(--line);
+  background:#fff;
+}
+.brand-mark img{width:100%;height:100%;object-fit:cover;object-position:center}
+.brand-text{line-height:.88}
+.brand-text strong{font-family:"Cormorant Garamond",serif;font-size:22px;letter-spacing:.06em}
+.brand-text small{display:block;font-size:8px;letter-spacing:.16em;color:var(--soft);margin-top:5px}
+.menu{display:flex;gap:21px;align-items:center;flex:1}
+.menu a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#373632}
+.menu a:hover{color:var(--rose-dark)}
+.nav-actions{display:flex;gap:8px}
+.icon-btn,.outline-btn{
+  border:1px solid var(--line);background:rgba(255,255,255,.6);padding:11px 14px;border-radius:999px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+}
+.mobile-menu{display:none}
+
+.hero{padding:76px 0 52px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:stretch}
+.hero-copy{
+  padding:54px 48px;border:1px solid var(--line);background:rgba(255,255,255,.56);
+  box-shadow:var(--shadow);border-radius:28px;position:relative;overflow:hidden;
+}
+.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-dark);font-weight:700}
+.hero h1{
+  font-family:"Cormorant Garamond",serif;font-size:clamp(58px,7vw,106px);line-height:.82;
+  font-weight:500;margin:20px 0 24px;letter-spacing:-.035em;
+}
+.hero h1 em{font-style:italic;color:#7b7068}
+.hero p{max-width:650px;color:var(--soft);line-height:1.75;font-size:15px}
+.search-box{
+  display:flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(23,23,22,.16);
+  border-radius:14px;padding:7px;margin-top:30px;box-shadow:0 12px 30px rgba(0,0,0,.07)
+}
+.search-box input{flex:1;border:0;outline:0;padding:15px;background:transparent;font-size:14px}
+.search-btn{
+  border:0;background:#171716;color:#fff;padding:15px 20px;border-radius:10px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase
+}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.chip{padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.7);font-size:11px}
+.hero-logo{
+  min-height:440px;border-radius:28px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:var(--shadow);background:#f5f4ee;position:relative;
+}
+.hero-logo img{width:100%;height:100%;object-fit:cover}
+.hero-logo .overlay{
+  position:absolute;left:24px;right:24px;bottom:24px;padding:16px 18px;border-radius:15px;
+  background:rgba(255,255,255,.78);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8)
+}
+.hero-logo .overlay b{font-family:"Cormorant Garamond",serif;font-size:23px;font-weight:600}
+.hero-logo .overlay span{display:block;color:var(--soft);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+
+.section{padding:46px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px}
+.section-head h2{font-family:"Cormorant Garamond",serif;font-size:42px;font-weight:500;margin:0}
+.section-head p{margin:0;color:var(--soft);font-size:12px}
+.grid{display:grid;gap:16px}
+.categories{grid-template-columns:repeat(6,1fr)}
+.cat{
+  min-height:148px;padding:20px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.58);
+  display:flex;flex-direction:column;justify-content:space-between;transition:.25s;position:relative;overflow:hidden
+}
+.cat:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-45px;bottom:-55px;background:rgba(179,138,115,.12)}
+.cat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.cat .num{font-size:10px;color:var(--soft)}
+.cat strong{font-family:"Cormorant Garamond",serif;font-size:27px;font-weight:600}
+.cat span{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rose-dark)}
+
+.stats{grid-template-columns:repeat(4,1fr)}
+.stat{padding:26px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.58)}
+.stat b{display:block;font-family:"Cormorant Garamond",serif;font-size:40px;font-weight:500}
+.stat span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+
+.toolbar{
+  display:flex;gap:10px;flex-wrap:wrap;padding:14px;border:1px solid var(--line);border-radius:18px;
+  background:rgba(255,255,255,.55);margin-bottom:18px
+}
+.toolbar select,.toolbar input{
+  border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px 12px;font-size:12px;outline:0
+}
+.toolbar input{min-width:220px;flex:1}
+.products{grid-template-columns:repeat(4,1fr)}
+.product{
+  background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,.04);transition:.25s
+}
+.product:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.product-img{
+  height:255px;background:
+    radial-gradient(circle at 50% 35%,rgba(180,160,140,.2),transparent 35%),
+    linear-gradient(135deg,#f3f1eb,#fff);
+  display:flex;align-items:center;justify-content:center;position:relative
+}
+.product-img:before{
+  content:"";width:145px;height:105px;border-radius:22px 22px 30px 30px;
+  background:linear-gradient(145deg,#1d1d1b,#55504b);box-shadow:0 28px 28px rgba(0,0,0,.18)
+}
+.product-img:after{content:"";position:absolute;width:55px;height:50px;border:6px solid #b9a38e;border-bottom:0;border-radius:50px 50px 0 0;top:83px}
+.badge{position:absolute;top:13px;left:13px;background:#171716;color:#fff;border-radius:999px;padding:7px 9px;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.product-body{padding:18px}
+.product-brand{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-dark)}
+.product h3{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:600;margin:6px 0}
+.product-meta{font-size:11px;color:var(--soft);margin-bottom:14px}
+.price-row{display:flex;justify-content:space-between;align-items:end}
+.price{font-family:"Cormorant Garamond",serif;font-size:27px}
+.change{font-size:10px;font-weight:700}
+.up{color:var(--green)} .down{color:var(--red)}
+.product-actions{display:flex;gap:7px;margin-top:15px}
+.product-actions button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.product-actions button.primary{background:#171716;color:#fff;border-color:#171716}
+
+.analysis{
+  display:grid;grid-template-columns:1.35fr .65fr;gap:18px
+}
+.panel{border:1px solid var(--line);background:rgba(255,255,255,.66);border-radius:22px;padding:24px}
+.panel h3{font-family:"Cormorant Garamond",serif;font-size:30px;margin:0 0 4px}
+.panel small{color:var(--soft)}
+.chart{
+  height:280px;margin-top:18px;position:relative;border-bottom:1px solid var(--line);border-left:1px solid var(--line);
+  background:repeating-linear-gradient(to bottom,transparent 0,transparent 54px,rgba(23,23,22,.07) 55px)
+}
+.chart svg{width:100%;height:100%;overflow:visible}
+.chart-labels{display:flex;justify-content:space-between;color:var(--soft);font-size:9px;margin-top:7px}
+.market-cards{display:grid;gap:10px;margin-top:18px}
+.market-card{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff;display:flex;justify-content:space-between}
+.market-card span{font-size:10px;color:var(--soft)}
+.market-card b{font-size:13px}
+
+.compare{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px
+}
+.compare-table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.68);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.compare-table th,.compare-table td{padding:15px;border-bottom:1px solid var(--line);text-align:left;font-size:11px}
+.compare-table th{font-family:"Cormorant Garamond",serif;font-size:19px;background:rgba(239,238,233,.7)}
+.compare-table tr:last-child td{border-bottom:0}
+.highlight{font-weight:700;color:var(--rose-dark)}
+
+.limited{grid-template-columns:repeat(3,1fr)}
+.limited-card{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.65);padding:22px;position:relative;overflow:hidden}
+.limited-card .edition{font-size:9px;letter-spacing:.18em;color:var(--rose-dark);text-transform:uppercase}
+.limited-card h3{font-family:"Cormorant Garamond",serif;font-size:30px;margin:8px 0}
+.mini-price{display:flex;gap:25px;margin:18px 0}
+.mini-price div span{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--soft)}
+.mini-price div b{font-family:"Cormorant Garamond",serif;font-size:22px}
+.spark{height:55px;margin-top:8px}
+.spark svg{width:100%;height:100%}
+
+.footer{margin-top:50px;background:#171716;color:#fff;padding:55px 0 25px}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px}
+.footer h3{font-family:"Cormorant Garamond",serif;font-size:28px;margin:0 0 10px}
+.footer p,.footer a{color:rgba(255,255,255,.62);font-size:11px;line-height:1.8}
+.footer a{display:block}
+.copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:35px;padding-top:18px;color:rgba(255,255,255,.4);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+
+.modal{
+  position:fixed;inset:0;background:rgba(10,10,10,.5);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px
+}
+.modal.open{display:flex}
+.modal-card{width:min(800px,100%);max-height:90vh;overflow:auto;background:#f7f6f2;border-radius:24px;border:1px solid rgba(255,255,255,.4);box-shadow:0 40px 100px rgba(0,0,0,.35);padding:28px}
+.modal-top{display:flex;justify-content:space-between;align-items:start}
+.close{border:1px solid var(--line);background:#fff;border-radius:50%;width:38px;height:38px}
+.result-list{display:grid;gap:10px;margin-top:20px}
+.result{padding:15px;border:1px solid var(--line);border-radius:14px;background:#fff;display:flex;justify-content:space-between;align-items:center}
+.result b{font-family:"Cormorant Garamond",serif;font-size:20px}
+.result small{display:block;color:var(--soft);font-size:9px;margin-top:3px}
+
+@media(max-width:1100px){
+  .menu{display:none}.mobile-menu{display:block}
+  .hero-grid,.analysis,.compare{grid-template-columns:1fr}
+  .categories{grid-template-columns:repeat(3,1fr)}
+  .products{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+  .topbar{display:none}.nav-inner{height:68px}.brand{min-width:0}.brand-text{display:none}
+  .hero{padding-top:30px}.hero-copy{padding:30px 22px}.hero-logo{min-height:300px}
+  .categories,.products,.stats,.limited{grid-template-columns:1fr}
+  .section-head{display:block}.section-head h2{font-size:35px;margin-bottom:6px}
+  .search-box{display:block;background:#fff}.search-box input{width:100%}.search-btn{width:100%}
+  .nav-actions .outline-btn{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">
+  <div class="container">
+    <span>Global Fashion Price Intelligence</span>
+    <span>Retail · Resale · Limited Editions · Historical Data</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#">
+      <div class="brand-mark"><img src="assets/luxus-bag-logo.png" alt="Luxus Bag Compare Logo"></div>
+      <div class="brand-text"><strong>LUXUS BAG</strong><small>COMPARE · PRICE INTELLIGENCE</small></div>
+    </a>
+    <nav class="menu">
+      <a href="#search">Search</a>
+      <a href="#categories">Categories</a>
+      <a href="#market">Market</a>
+      <a href="#products">Products</a>
+      <a href="#limited">Limited</a>
+      <a href="#history">Price History</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="outline-btn" onclick="openCompare()">Compare <span id="compareCount">0</span></button>
+      <button class="icon-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⌃</button>
+    </div>
+    <button class="icon-btn mobile-menu" onclick="document.querySelector('.menu').classList.toggle('mobile-show')">Menu</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="search">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="kicker">The global fashion price platform</div>
+      <h1>Find the<br><em>real</em> price.</h1>
+      <p>Vergleiche Luxusmode, Taschen, Schuhe, Uhren, Parfüms und Limited Editions weltweit. Entdecke Händlerpreise, offizielle Retailpreise und historische Marktbewegungen.</p>
+      <div class="search-box">
+        <input id="searchInput" placeholder="Marke, Produkt, Modell oder Referenz suchen …" onkeydown="if(event.key==='Enter') runSearch()">
+        <button class="search-btn" onclick="runSearch()">Search Market</button>
+      </div>
+      <div class="quick">
+        <button class="chip" onclick="quickSearch('Chanel')">Chanel</button>
+        <button class="chip" onclick="quickSearch('Louis Vuitton')">Louis Vuitton</button>
+        <button class="chip" onclick="quickSearch('Hermès')">Hermès</button>
+        <button class="chip" onclick="quickSearch('Dior')">Dior</button>
+        <button class="chip" onclick="quickSearch('Limited Edition')">Limited Editions</button>
+      </div>
+    </div>
+
+    <div class="hero-logo">
+      <img src="assets/luxus-bag-logo.png" alt="LUXUS BAG COMPARE">
+      <div class="overlay">
+        <b>Compare. Track. Understand.</b>
+        <span>Worldwide fashion price intelligence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">Explore</div><h2>Fashion Categories</h2></div>
+      <p>Von ikonischen Taschen bis zu seltenen Editionen.</p>
+    </div>
+    <div class="grid categories">
+      <a class="cat" href="#products" onclick="filterCategory('Bags')"><span class="num">01</span><strong>Bags</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Shoes')"><span class="num">02</span><strong>Shoes</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Watches')"><span class="num">03</span><strong>Watches</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Jewelry')"><span class="num">04</span><strong>Jewelry</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#products" onclick="filterCategory('Perfume')"><span class="num">05</span><strong>Perfume</strong><span>Compare prices →</span></a>
+      <a class="cat" href="#limited" onclick="filterCategory('Limited')"><span class="num">06</span><strong>Limited</strong><span>Track value →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid stats">
+      <div class="stat"><b>12,482+</b><span>Products tracked</span></div>
+      <div class="stat"><b>1,240+</b><span>Brands & labels</span></div>
+      <div class="stat"><b>72</b><span>Markets planned</span></div>
+      <div class="stat"><b>4.8M</b><span>Historical price points</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">The catalogue</div><h2>Market Products</h2></div>
+      <p>Demo data — live retailer APIs can be connected later.</p>
+    </div>
+
+    <div class="toolbar">
+      <input id="productFilter" placeholder="Produkte filtern …" oninput="renderProducts()">
+      <select id="categoryFilter" onchange="renderProducts()">
+        <option value="">All categories</option><option>Bags</option><option>Shoes</option><option>Watches</option><option>Jewelry</option><option>Perfume</option>
+      </select>
+      <select id="trendFilter" onchange="renderProducts()">
+        <option value="">All trends</option><option value="up">Rising</option><option value="down">Falling</option>
+      </select>
+      <button class="outline-btn" onclick="resetFilters()">Reset</button>
+    </div>
+    <div class="grid products" id="productGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="market">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">Global market</div><h2>Where is it cheaper?</h2></div>
+      <p>Retail price comparison by market.</p>
+    </div>
+    <div class="analysis">
+      <div class="panel">
+        <h3>Global price map</h3>
+        <small>Illustrative market data for the prototype.</small>
+        <div style="margin-top:24px;padding:35px;border:1px dashed var(--line);border-radius:18px;background:linear-gradient(135deg,#f4f2ec,#fff);">
+          <div style="font-family:'Cormorant Garamond';font-size:48px;">WORLDWIDE</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;">
+            <div class="market-card"><span>Italy</span><b>€10,150</b></div>
+            <div class="market-card"><span>France</span><b>€10,500</b></div>
+            <div class="market-card"><span>Germany</span><b>€10,620</b></div>
+            <div class="market-card"><span>UK</span><b>€11,100</b></div>
+            <div class="market-card"><span>USA</span><b>$12,300</b></div>
+            <div class="market-card"><span>Japan</span><b>¥1.85M</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Price snapshot</h3>
+        <small>Chanel Classic Flap — demo</small>
+        <div class="market-cards">
+          <div class="market-card"><span>Lowest market</span><b>€10,150</b></div>
+          <div class="market-card"><span>Average</span><b>€10,560</b></div>
+          <div class="market-card"><span>Highest</span><b>€11,900</b></div>
+          <div class="market-card"><span>Market spread</span><b>+17.2%</b></div>
+        </div>
+        <button class="search-btn" style="width:100%;margin-top:16px" onclick="openSearchResults('Chanel')">Compare retailers</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="history">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">Price history</div><h2>How value moves</h2></div>
+      <p>Retail evolution · 2019–2026</p>
+    </div>
+    <div class="analysis">
+      <div class="panel">
+        <h3>Chanel Classic Flap</h3>
+        <small>Illustrative historical retail price</small>
+        <div class="chart">
+          <svg viewBox="0 0 900 280" preserveAspectRatio="none">
+            <defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b38a73" stop-opacity=".28"/><stop offset="1" stop-color="#b38a73" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0 245 L125 225 L250 205 L375 178 L500 145 L625 118 L750 75 L900 32 L900 280 L0 280 Z" fill="url(#fill)"/>
+            <polyline points="0,245 125,225 250,205 375,178 500,145 625,118 750,75 900,32" fill="none" stroke="#8c6855" stroke-width="4"/>
+            <circle cx="900" cy="32" r="7" fill="#171716"/>
+          </svg>
+        </div>
+        <div class="chart-labels"><span>2019</span><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span></div>
+      </div>
+      <div class="panel">
+        <h3>Performance</h3>
+        <small>Calculated from the demo series</small>
+        <div style="font-family:'Cormorant Garamond';font-size:64px;margin:20px 0 4px;">+56.7%</div>
+        <div class="up" style="font-size:12px;font-weight:700;">RISING MARKET</div>
+        <div class="market-cards">
+          <div class="market-card"><span>Lowest recorded</span><b>€6,700</b></div>
+          <div class="market-card"><span>Current retail</span><b>€10,500</b></div>
+          <div class="market-card"><span>5Y direction</span><b>Upward</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="limited">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">Archive & resale</div><h2>Limited Editions</h2></div>
+      <p>Original price versus current market value.</p>
+    </div>
+    <div class="grid limited">
+      <article class="limited-card">
+        <div class="edition">Limited Edition · 2021</div>
+        <h3>LV × Artist Capsule</h3>
+        <div class="mini-price"><div><span>Original</span><b>€2,400</b></div><div><span>Market</span><b>€5,800</b></div></div>
+        <div class="up">+141.7% market premium</div>
+        <div class="spark"><svg viewBox="0 0 300 55" preserveAspectRatio="none"><polyline points="0,45 45,42 90,39 135,30 180,25 225,13 300,5" fill="none" stroke="#426653" stroke-width="3"/></svg></div>
+      </article>
+      <article class="limited-card">
+        <div class="edition">Limited Edition · 2023</div>
+        <h3>Dior Saddle Capsule</h3>
+        <div class="mini-price"><div><span>Original</span><b>€3,900</b></div><div><span>Market</span><b>€4,650</b></div></div>
+        <div class="up">+19.2% market premium</div>
+        <div class="spark"><svg viewBox="0 0 300 55" preserveAspectRatio="none"><polyline points="0,42 45,39 90,35 135,36 180,26 225,20 300,14" fill="none" stroke="#8c6855" stroke-width="3"/></svg></div>
+      </article>
+      <article class="limited-card">
+        <div class="edition">Discontinued · 2019</div>
+        <h3>Chanel Seasonal Mini</h3>
+        <div class="mini-price"><div><span>Original</span><b>€2,950</b></div><div><span>Market</span><b>€6,100</b></div></div>
+        <div class="up">+106.8% market premium</div>
+        <div class="spark"><svg viewBox="0 0 300 55" preserveAspectRatio="none"><polyline points="0,47 45,45 90,40 135,32 180,28 225,16 300,4" fill="none" stroke="#426653" stroke-width="3"/></svg></div>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>LUXUS BAG COMPARE</h3>
+        <p>Vergleichen & das beste Angebot finden. Eine unabhängige Fashion-Price-Intelligence-Plattform — nicht selbst als Händler tätig.</p>
+      </div>
+      <div><h3>Explore</h3><a href="#products">Products</a><a href="#market">Global Market</a><a href="#limited">Limited Editions</a><a href="#history">Price History</a></div>
+      <div><h3>Categories</h3><a href="#products">Bags</a><a href="#products">Shoes</a><a href="#products">Watches</a><a href="#products">Perfume</a></div>
+      <div><h3>Platform</h3><a href="#">About</a><a href="#">Data Sources</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <div class="copyright">© 2026 LUXUS BAG COMPARE · Prototype / Demo data</div>
+  </div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-top">
+      <div><div class="kicker">Market search</div><h2 style="font-family:'Cormorant Garamond';font-size:42px;margin:8px 0 0;">Search results</h2></div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const products=[
+ {brand:"Chanel",name:"Classic Flap Medium",category:"Bags",price:10500,change:7.8,trend:"up",meta:"Black · Caviar · Medium"},
+ {brand:"Louis Vuitton",name:"Neverfull MM",category:"Bags",price:1650,change:3.2,trend:"up",meta:"Monogram · Canvas · MM"},
+ {brand:"Hermès",name:"Birkin 25",category:"Bags",price:12800,change:11.4,trend:"up",meta:"Gold · Togo · 25cm"},
+ {brand:"Dior",name:"Lady Dior",category:"Bags",price:5900,change:-1.9,trend:"down",meta:"Black · Cannage · Medium"},
+ {brand:"Gucci",name:"Ace Sneaker",category:"Shoes",price:790,change:2.4,trend:"up",meta:"White · Leather · EU 39"},
+ {brand:"Prada",name:"Monolith Loafer",category:"Shoes",price:1050,change:-3.5,trend:"down",meta:"Black · Brushed leather"},
+ {brand:"Rolex",name:"Datejust 36",category:"Watches",price:9200,change:5.7,trend:"up",meta:"Steel · Automatic · 36mm"},
+ {brand:"Cartier",name:"Love Bracelet",category:"Jewelry",price:7550,change:4.1,trend:"up",meta:"Yellow gold · Classic"},
+ {brand:"Dior",name:"Sauvage Elixir",category:"Perfume",price:168,change:-2.1,trend:"down",meta:"60ml · Eau de Parfum"},
+ {brand:"Chanel",name:"Coco Mademoiselle",category:"Perfume",price:145,change:1.8,trend:"up",meta:"100ml · Eau de Parfum"},
+ {brand:"Bottega Veneta",name:"Andiamo",category:"Bags",price:4200,change:6.3,trend:"up",meta:"Fondant · Calfskin"},
+ {brand:"Van Cleef & Arpels",name:"Alhambra Pendant",category:"Jewelry",price:3650,change:8.2,trend:"up",meta:"Mother of pearl · Gold"}
+];
+
+function money(n){return new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n)}
+function renderProducts(){
+ const q=document.getElementById('productFilter').value.toLowerCase();
+ const c=document.getElementById('categoryFilter').value;
+ const t=document.getElementById('trendFilter').value;
+ const list=products.filter(p=>(!q||(p.brand+" "+p.name+" "+p.meta).toLowerCase().includes(q))&&(!c||p.category===c)&&(!t||p.trend===t));
+ document.getElementById('productGrid').innerHTML=list.map((p,i)=>`
+  <article class="product">
+    <div class="product-img"><span class="badge">${p.category}</span></div>
+    <div class="product-body">
+      <div class="product-brand">${p.brand}</div>
+      <h3>${p.name}</h3>
+      <div class="product-meta">${p.meta}</div>
+      <div class="price-row"><div class="price">${money(p.price)}</div><div class="change ${p.trend==='up'?'up':'down'}">${p.change>0?'+':''}${p.change}%</div></div>
+      <div class="product-actions">
+        <button class="primary" onclick="addCompare(${products.indexOf(p)})">Compare</button>
+        <button onclick="openProduct(${products.indexOf(p)})">Details</button>
+      </div>
+    </div>
+  </article>`).join('') || '<div class="panel" style="grid-column:1/-1">Keine Produkte gefunden.</div>';
+}
+function filterCategory(cat){document.getElementById('categoryFilter').value=cat;setTimeout(renderProducts,50)}
+function resetFilters(){document.getElementById('productFilter').value='';document.getElementById('categoryFilter').value='';document.getElementById('trendFilter').value='';renderProducts()}
+function quickSearch(q){document.getElementById('searchInput').value=q;runSearch()}
+function runSearch(){openSearchResults(document.getElementById('searchInput').value||'Fashion')}
+function openSearchResults(q){
+ const matches=products.filter(p=>(p.brand+" "+p.name+" "+p.category).toLowerCase().includes(q.toLowerCase()));
+ document.getElementById('modalContent').innerHTML=`
+   <p style="color:var(--soft);font-size:12px;">Suchbegriff: <b>${q}</b> · ${matches.length} Demo-Treffer</p>
+   <div class="result-list">${(matches.length?matches:products.slice(0,5)).map(p=>`
+    <div class="result"><div><b>${p.brand} — ${p.name}</b><small>${p.category} · ${p.meta}</small></div><strong>${money(p.price)}</strong></div>`).join('')}</div>
+   <p style="font-size:10px;color:var(--soft);margin-top:18px;">In der späteren Live-Version werden hier Händler, Länder, Verfügbarkeit, aktuelle Quellen und historische Preisreihen geladen.</p>`;
+ document.getElementById('modal').classList.add('open');
+}
+function openProduct(i){
+ const p=products[i];
+ document.getElementById('modalContent').innerHTML=`
+  <div style="display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:start;margin-top:22px;">
+   <div class="product-img" style="height:180px;border-radius:16px"></div>
+   <div><div class="product-brand">${p.brand}</div><h2 style="font-family:'Cormorant Garamond';font-size:36px;margin:5px 0">${p.name}</h2>
+   <p style="color:var(--soft);font-size:12px">${p.meta}</p><div style="font-family:'Cormorant Garamond';font-size:42px">${money(p.price)}</div>
+   <div class="${p.trend==='up'?'up':'down'}" style="font-size:11px;font-weight:700;margin-top:4px">${p.change>0?'+':''}${p.change}% market movement</div></div>
+  </div>
+  <div class="market-cards" style="margin-top:22px">
+   <div class="market-card"><span>Lowest retailer</span><b>${money(Math.round(p.price*.965))}</b></div>
+   <div class="market-card"><span>Average market</span><b>${money(p.price)}</b></div>
+   <div class="market-card"><span>Highest retailer</span><b>${money(Math.round(p.price*1.12))}</b></div>
+  </div>`;
+ document.getElementById('modal').classList.add('open');
+}
+let compare=[];
+function addCompare(i){
+ if(!compare.includes(i)&&compare.length<3) compare.push(i);
+ document.getElementById('compareCount').textContent=compare.length;
+ if(compare.length===3) openCompare();
+}
+function openCompare(){
+ if(!compare.length){openSearchResults('Compare');return}
+ const items=compare.map(i=>products[i]);
+ document.getElementById('modalContent').innerHTML=`
+  <p style="color:var(--soft);font-size:12px;">Bis zu drei Produkte werden nebeneinander verglichen.</p>
+  <table class="compare-table"><tr><th>Metric</th>${items.map(p=>`<th>${p.brand}<br>${p.name}</th>`).join('')}</tr>
+  <tr><td>Current price</td>${items.map(p=>`<td class="highlight">${money(p.price)}</td>`).join('')}</tr>
+  <tr><td>Category</td>${items.map(p=>`<td>${p.category}</td>`).join('')}</tr>
+  <tr><td>Market movement</td>${items.map(p=>`<td class="${p.trend==='up'?'up':'down'}">${p.change>0?'+':''}${p.change}%</td>`).join('')}</tr>
+  <tr><td>Demo lowest</td>${items.map(p=>`<td>${money(Math.round(p.price*.965))}</td>`).join('')}</tr>
+  </table>
+  <button class="outline-btn" style="margin-top:16px" onclick="compare=[];document.getElementById('compareCount').textContent=0;closeModal()">Clear comparison</button>`;
+ document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+renderProducts();
+</script>
+</body>
+</html>
