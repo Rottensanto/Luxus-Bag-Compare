@@ -12,5 +12,8 @@
   "color": "Schwarz",
   "description": "Kurze professionelle Produktbeschreibung.",
   "price_eur": 0,
-  "image_url": "https://example.com/image.png"
+  "image_url": "https://example.com/image.png",
+  "price_history_eur": [0],
+  "price_change_percent": 0,
+  "product_url": "https://example.com/product"
 }
